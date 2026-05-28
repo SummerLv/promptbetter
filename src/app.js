@@ -327,7 +327,7 @@ function showRecent() {
                 <p class="text-sm mt-1">Copy a prompt and it will appear here.</p>
             </div>
         `;
-        document.getElementById('load-more-btn').style.display = 'none';
+        document.getElementById('load-more-btn').classList.add('hidden');
         return;
     }
 
@@ -671,15 +671,15 @@ function viewPrompt(id) {
     };
 
     modal.innerHTML = `
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl fade-in">
+        <div class="bg-white dark:bg-[#16213e] rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 shadow-2xl fade-in">
             <div class="flex justify-between items-start mb-4">
                 <div>
-                    <span class="text-xs font-medium text-primary bg-indigo-50 px-2 py-1 rounded-full">
+                    <span class="text-xs font-medium text-primary bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-full">
                         ${getCategoryIcon(prompt.category)} ${capitalizeFirst(prompt.category)}
                     </span>
-                    <h2 class="text-2xl font-bold mt-2">${prompt.title}</h2>
+                    <h2 class="text-2xl font-bold mt-2 dark:text-white">${prompt.title}</h2>
                 </div>
-                <button onclick="this.closest('.fixed').remove(); history.replaceState(null, '', window.location.pathname);" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                <button onclick="this.closest('.fixed').remove(); history.replaceState(null, '', window.location.pathname);" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-2xl">&times;</button>
             </div>
             <div class="flex flex-wrap gap-2 mb-4">
                 ${prompt.models.map(m => `<span class="text-sm bg-gray-100 text-gray-600 px-3 py-1 rounded-full">${getModelLabel(m)}</span>`).join('')}
@@ -776,7 +776,7 @@ function initSearch() {
         currentFilter = 'all';
         const query = input.value.toLowerCase().trim();
         if (query.length < 2) {
-            renderPrompts(PROMPTS);
+            initLazyRender(PROMPTS);
             return;
         }
         const filtered = PROMPTS.filter(p =>
@@ -847,7 +847,7 @@ function initModelFilters() {
 
             const model = btn.dataset.model;
             if (model === 'all') {
-                renderPrompts(PROMPTS);
+                initLazyRender(PROMPTS);
             } else {
                 const filtered = PROMPTS.filter(p => p.models.includes(model));
                 renderPrompts(filtered, 20);
@@ -875,11 +875,11 @@ function initMobileMenu() {
     const nav = document.querySelector('nav .max-w-7xl');
     const mobileMenu = document.createElement('div');
     mobileMenu.id = 'mobile-menu';
-    mobileMenu.className = 'hidden md:hidden bg-white border-t border-gray-100 py-4 px-4 space-y-3';
+    mobileMenu.className = 'hidden md:hidden bg-white dark:bg-[#16213e] border-t border-gray-100 dark:border-gray-700 py-4 px-4 space-y-3';
     mobileMenu.innerHTML = `
-        <a href="#categories" class="block text-gray-600 hover:text-indigo-500 py-2">Categories</a>
-        <a href="#popular" class="block text-gray-600 hover:text-indigo-500 py-2">Popular</a>
-        <a href="#models" class="block text-gray-600 hover:text-indigo-500 py-2">AI Models</a>
+        <a href="#categories" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">Categories</a>
+        <a href="#popular" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">Popular</a>
+        <a href="#models" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">AI Models</a>
         <button onclick="showFavorites(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 hover:text-indigo-500 py-2">❤️ My Saved</button>
         <button onclick="showRecent(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 hover:text-indigo-500 py-2">🕐 Recent</button>
         <a href="https://buymeacoffee.com/promptbetter" target="_blank" rel="noopener" class="block bg-yellow-400 text-black font-medium px-4 py-2 rounded-lg text-center">☕ Buy me a coffee</a>
@@ -959,13 +959,13 @@ function renderEmptySearchResults(query) {
                     </button>`
                 ).join('')}
             </div>
-            <button onclick="document.getElementById('search-input').value=''; renderPrompts(PROMPTS);"
+            <button onclick="document.getElementById('search-input').value=''; initLazyRender(PROMPTS);"
                     class="text-primary font-medium hover:underline">
                 ← Show all prompts
             </button>
         </div>
     `;
-    document.getElementById('load-more-btn').style.display = 'none';
+    document.getElementById('load-more-btn').classList.add('hidden');
 }
 
 // === FEATURE: Back to Top Button ===
@@ -1045,6 +1045,10 @@ function injectStyles() {
                         linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899) border-box;
             border: 2px solid transparent;
             transition: all 0.3s ease;
+        }
+        html.dark .potd-card {
+            background: linear-gradient(#16213e, #16213e) padding-box,
+                        linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899) border-box;
         }
         .potd-card:hover {
             transform: translateY(-2px);
