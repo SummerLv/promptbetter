@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     initModelFilters();
     initMobileMenu();
+    initBackToTop();
     handleHashNavigation();
 });
 
@@ -417,6 +418,57 @@ function getShareUrl(promptId) {
     return `${base}#prompt-${promptId}`;
 }
 
+// === "Try It" Button — Open prompt in AI chat ===
+function getFilledPromptText(promptId) {
+    const prompt = PROMPTS.find(p => p.id === promptId);
+    if (!prompt) return '';
+
+    const modal = document.querySelector('.fixed.inset-0');
+    if (!modal) return prompt.prompt;
+
+    const inputs = modal.querySelectorAll('.var-input');
+    let filledText = prompt.prompt;
+
+    inputs.forEach(input => {
+        const placeholder = input.dataset.placeholder;
+        const value = input.textContent.trim() || placeholder;
+        filledText = filledText.replace(placeholder, value);
+    });
+
+    return filledText;
+}
+
+function getTryItUrl(promptId) {
+    const prompt = PROMPTS.find(p => p.id === promptId);
+    if (!prompt) return null;
+
+    const text = getFilledPromptText(promptId);
+    const encoded = encodeURIComponent(text);
+    const primaryModel = prompt.models[0];
+
+    const urlMap = {
+        'chatgpt': `https://chat.openai.com/?q=${encoded}`,
+        'claude': `https://claude.ai/new?q=${encoded}`,
+        'gemini': `https://gemini.google.com/?q=${encoded}`,
+    };
+
+    return urlMap[primaryModel] || urlMap['chatgpt'];
+}
+
+function tryItInAI(promptId) {
+    const url = getTryItUrl(promptId);
+    if (url) {
+        window.open(url, '_blank');
+    }
+}
+
+function getModelNameForTryIt(promptId) {
+    const prompt = PROMPTS.find(p => p.id === promptId);
+    if (!prompt) return 'AI';
+    const labels = { 'chatgpt': 'ChatGPT', 'claude': 'Claude', 'gemini': 'Gemini' };
+    return labels[prompt.models[0]] || 'AI';
+}
+
 // Handle #prompt-{id} hash on page load
 function handleHashNavigation() {
     const hash = window.location.hash;
@@ -477,6 +529,11 @@ function viewPrompt(id) {
                 <button onclick="copyFilledPrompt(${prompt.id}); this.textContent='✓ Copied!'; setTimeout(() => this.textContent='📋 Copy to Clipboard', 2000)"
                         class="flex-1 bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-indigo-700 transition">
                     📋 Copy to Clipboard
+                </button>
+                <button onclick="tryItInAI(${prompt.id})"
+                        class="try-it-btn bg-green-500 text-white py-3 px-5 rounded-lg font-medium hover:bg-green-600 transition"
+                        title="Open in ${getModelNameForTryIt(prompt.id)}">
+                    🚀 Try it
                 </button>
                 <button onclick="toggleFavorite(${prompt.id}); this.innerHTML = isFavorite(${prompt.id}) ? '❤️ Saved' : '🤍 Save'; if(isFavorite(${prompt.id})) this.classList.add('heart-pulse');"
                         class="bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition">
@@ -559,7 +616,11 @@ function initSearch() {
             p.tags.some(t => t.includes(query)) ||
             p.category.includes(query)
         );
-        renderPrompts(filtered, 20);
+        if (filtered.length === 0) {
+            renderEmptySearchResults(query);
+        } else {
+            renderPrompts(filtered, 20);
+        }
         document.getElementById('popular').scrollIntoView({ behavior: 'smooth' });
     };
 
@@ -711,6 +772,56 @@ function formatTimeAgo(timestamp) {
     return `${days}d ago`;
 }
 
+// === FEATURE: Empty Search Results ===
+function renderEmptySearchResults(query) {
+    const grid = document.getElementById('prompts-grid');
+    const suggestions = CATEGORIES.slice(0, 4).map(c => c.name).join(', ');
+    grid.innerHTML = `
+        <div class="col-span-full text-center py-16 text-gray-500 fade-in">
+            <span class="text-5xl block mb-4">🔍</span>
+            <p class="text-xl font-semibold text-gray-700 mb-2">No prompts found for "${escapeHtml(query)}"</p>
+            <p class="text-sm text-gray-500 mb-6">Try a different keyword or browse by category</p>
+            <div class="flex flex-wrap justify-center gap-2 mb-4">
+                <span class="text-sm text-gray-400">Suggestions:</span>
+                ${['writing', 'coding', 'marketing', 'email', 'seo', 'startup'].map(s =>
+                    `<button class="text-sm bg-indigo-50 text-primary px-3 py-1 rounded-full hover:bg-indigo-100 transition"
+                             onclick="document.getElementById('search-input').value='${s}'; document.getElementById('search-input').dispatchEvent(new Event('input'));">
+                        ${s}
+                    </button>`
+                ).join('')}
+            </div>
+            <button onclick="document.getElementById('search-input').value=''; renderPrompts(PROMPTS);"
+                    class="text-primary font-medium hover:underline">
+                ← Show all prompts
+            </button>
+        </div>
+    `;
+    document.getElementById('load-more-btn').style.display = 'none';
+}
+
+// === FEATURE: Back to Top Button ===
+function initBackToTop() {
+    const btn = document.createElement('button');
+    btn.id = 'back-to-top';
+    btn.className = 'fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full shadow-lg z-40 flex items-center justify-center text-xl font-bold hover:bg-indigo-700 transition-all duration-300 opacity-0 translate-y-4 pointer-events-none';
+    btn.innerHTML = '↑';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btn.classList.add('opacity-100', 'translate-y-0');
+        } else {
+            btn.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+            btn.classList.remove('opacity-100', 'translate-y-0');
+        }
+    });
+}
+
 // Inject dynamic styles for new features
 function injectStyles() {
     const style = document.createElement('style');
@@ -789,6 +900,21 @@ function injectStyles() {
         /* Smooth scroll for everything */
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Try It button */
+        .try-it-btn {
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .try-it-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Back to top button */
+        #back-to-top {
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
     `;
     document.head.appendChild(style);

@@ -24,6 +24,43 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PromptBetter",
+        "description": "Free AI prompt templates for ChatGPT, Claude, Gemini",
+        "url": "https://summerlv.github.io/promptbetter/",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "AI Prompt Template Categories",
+        "description": "Browse AI prompt templates by category",
+        "numberOfItems": 12,
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Writing", "description": "Blog posts, emails, copy, stories"},
+            {"@type": "ListItem", "position": 2, "name": "Coding", "description": "Debug, refactor, generate, explain"},
+            {"@type": "ListItem", "position": 3, "name": "Marketing", "description": "SEO, ads, social media, funnels"},
+            {"@type": "ListItem", "position": 4, "name": "Business", "description": "Strategy, analysis, planning"},
+            {"@type": "ListItem", "position": 5, "name": "Education", "description": "Teaching, learning, tutoring"},
+            {"@type": "ListItem", "position": 6, "name": "Creative", "description": "Art, design, brainstorming"},
+            {"@type": "ListItem", "position": 7, "name": "Productivity", "description": "Workflows, automation, planning"},
+            {"@type": "ListItem", "position": 8, "name": "Data & Analytics", "description": "SQL, analysis, visualization"},
+            {"@type": "ListItem", "position": 9, "name": "Sales", "description": "Outreach, proposals, closing"},
+            {"@type": "ListItem", "position": 10, "name": "HR & Career", "description": "Resumes, interviews, hiring"},
+            {"@type": "ListItem", "position": 11, "name": "Legal", "description": "Contracts, policies, compliance"},
+            {"@type": "ListItem", "position": 12, "name": "Health & Wellness", "description": "Fitness, nutrition, mental health"}
+        ]
+    }
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -95,7 +132,7 @@
                 Free AI Prompt Templates
             </h1>
             <p class="text-xl md:text-2xl text-indigo-100 mb-8 max-w-3xl mx-auto">
-                40+ curated prompts for ChatGPT, Claude Opus 4, Gemini 3.5 Flash & more.
+                60+ curated prompts for ChatGPT, Claude Opus 4, Gemini 3.5 Flash & more.
                 Copy, paste, and get better AI results instantly.
             </p>
 
@@ -124,7 +161,7 @@
     <section class="bg-white border-b py-4">
         <div class="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-8 text-center">
             <div>
-                <span class="text-2xl font-bold text-primary">40+</span>
+                <span class="text-2xl font-bold text-primary">60+</span>
                 <span class="text-gray-600 ml-1">Prompts</span>
             </div>
             <div>
