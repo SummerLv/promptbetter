@@ -2016,6 +2016,986 @@ Generate 3 test ideas ranked by expected impact and ease of implementation.`
 - Common thumbnail mistakes for this niche
 - Canva/Photoshop layer suggestions`
     },
+    {
+        id: 61,
+        title: 'Instagram Caption Generator',
+        category: 'marketing',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['instagram', 'caption', 'social-media'],
+        popularity: 89,
+        prompt: `Write scroll-stopping Instagram captions for my post:
+
+**Post Details:**
+- Content type: [PHOTO/CAROUSEL/REEL/STORY]
+- Topic/Subject: [WHAT THE POST IS ABOUT]
+- Brand/Account type: [PERSONAL/BUSINESS/CREATOR]
+- Niche: [YOUR NICHE - e.g., fitness, travel, food, fashion, tech]
+- Goal: [ENGAGEMENT/SALES/FOLLOWERS/BRAND AWARENESS]
+- Tone: [FUNNY/INSPIRATIONAL/EDUCATIONAL/CASUAL/PROFESSIONAL]
+
+**Target audience:**
+- Age range: [DEMOGRAPHIC]
+- Interests: [WHAT THEY CARE ABOUT]
+- Pain point this addresses: [PROBLEM YOU SOLVE]
+
+**Generate 3 caption options:**
+
+1. **Short & punchy** (under 125 characters) - for quick engagement
+2. **Medium storytelling** (150-300 words) - hook + value + CTA
+3. **Long-form value** (300+ words) - micro-blog style with tips
+
+**Each caption must include:**
+- Strong hook in first line (before "...more" cutoff)
+- Relevant emojis (not overdone)
+- Clear call-to-action (save, share, comment, link in bio)
+- 20-30 relevant hashtags (mix of small, medium, large volume)
+- Best posting time recommendation for this content type
+
+**Also provide:**
+- Alt text for accessibility
+- Story poll/question sticker ideas to pair with this post
+- Reels audio suggestion if applicable`
+    },
+    {
+        id: 62,
+        title: 'SQL Query Optimizer',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['sql', 'database', 'optimization'],
+        popularity: 87,
+        prompt: `Optimize this SQL query for better performance:
+
+**Current Query:**
+\`\`\`sql
+[PASTE YOUR SQL QUERY HERE]
+\`\`\`
+
+**Context:**
+- Database: [MYSQL/POSTGRESQL/SQL SERVER/ORACLE/SQLITE]
+- Table sizes: [APPROXIMATE ROW COUNTS FOR EACH TABLE]
+- Current execution time: [HOW LONG IT TAKES]
+- Indexes available: [EXISTING INDEXES, IF KNOWN]
+- Frequency: [HOW OFTEN THIS QUERY RUNS]
+- Use case: [REPORTING/REAL-TIME/BATCH/API ENDPOINT]
+
+**Please provide:**
+
+1. **Optimized query** - Rewritten for maximum performance
+2. **Explanation of changes** - Why each modification helps
+3. **Index recommendations** - What indexes to create (with CREATE INDEX statements)
+4. **Execution plan analysis** - What the optimizer likely does with original vs. new
+5. **Performance estimate** - Expected improvement factor
+6. **Alternative approaches:**
+   - CTE version (if applicable)
+   - Window function version (if applicable)
+   - Materialized view suggestion (if query runs frequently)
+7. **Anti-patterns identified** - Common SQL mistakes in the original
+8. **Scalability notes** - How this will perform as data grows 10x/100x
+
+**Bonus:**
+- If this could be split into multiple simpler queries, show that option
+- Suggest query caching strategy if appropriate
+- Note any database-specific features that could help`
+    },
+    {
+        id: 63,
+        title: 'Presentation Slide Outline',
+        category: 'business',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['presentation', 'slides', 'pitch'],
+        popularity: 88,
+        prompt: `Create a compelling presentation slide deck outline:
+
+**Presentation Details:**
+- Topic: [SUBJECT OF PRESENTATION]
+- Duration: [5/10/15/20/30/60 MINUTES]
+- Audience: [WHO - executives, team, clients, investors, conference]
+- Purpose: [INFORM/PERSUADE/TEACH/PITCH/UPDATE]
+- Presentation tool: [POWERPOINT/GOOGLE SLIDES/KEYNOTE/CANVA]
+
+**Context:**
+- Key message: [ONE SENTENCE - what should they remember?]
+- Supporting data: [KEY STATS OR FACTS TO INCLUDE]
+- Desired outcome: [WHAT ACTION AFTER THE PRESENTATION]
+- Audience knowledge level: [NONE/BASIC/INTERMEDIATE/EXPERT]
+
+**Generate a slide-by-slide outline:**
+
+For each slide provide:
+1. **Slide title** (clear, action-oriented)
+2. **Key message** (one sentence - the "so what?")
+3. **Visual suggestion** (chart type, image, diagram, or icon)
+4. **Bullet points** (max 3-4 per slide)
+5. **Speaker notes** (what to SAY vs. what's on screen)
+6. **Transition** (how to move to next slide naturally)
+
+**Structure:**
+- Title slide with subtitle
+- Agenda/overview
+- Problem statement (why this matters)
+- 3-5 content slides (main body)
+- Data/evidence slide
+- Recommendation/solution
+- Next steps
+- Q&A / Thank you
+
+**Also include:**
+- Design tips (color palette, font suggestions)
+- Storytelling arc (tension → resolution)
+- Backup slides for anticipated questions`
+    },
+    {
+        id: 64,
+        title: "Children's Story Writer",
+        category: 'creative',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['story', 'children', 'bedtime'],
+        popularity: 86,
+        prompt: `Write an engaging children's story:
+
+**Story Parameters:**
+- Child's name: [NAME - to personalize]
+- Age group: [2-4/5-7/8-10/11-13]
+- Theme/Lesson: [FRIENDSHIP/COURAGE/KINDNESS/HONESTY/DIVERSITY/PERSEVERANCE]
+- Setting: [FANTASY KINGDOM/OUTER SPACE/UNDERWATER/FOREST/SCHOOL/HOME]
+- Main character type: [CHILD/ANIMAL/MAGICAL CREATURE/ROBOT]
+- Tone: [FUNNY/ADVENTUROUS/GENTLE/MYSTERIOUS/SILLY]
+- Length: [SHORT - 500 words / MEDIUM - 1000 words / LONG - 2000 words]
+
+**Interests to weave in:** [DINOSAURS/PRINCESSES/SPACE/ANIMALS/SPORTS/MUSIC]
+
+**Story structure:**
+1. **Opening** - Introduce character in their world (relatable moment)
+2. **Inciting event** - Something changes or a problem appears
+3. **Rising action** - Character tries to solve it (with setbacks)
+4. **Climax** - The big moment of bravery/cleverness/kindness
+5. **Resolution** - Problem solved, lesson learned naturally
+6. **Ending** - Warm, satisfying close (with hint of next adventure)
+
+**Guidelines:**
+- Age-appropriate vocabulary and sentence length
+- Repetition for younger ages (catchphrases, repeated patterns)
+- Diverse, inclusive characters
+- No scary or violent content
+- Include dialogue to bring characters alive
+- Sensory details (sounds, colors, textures)
+- A moral that emerges naturally (never preachy)
+
+**Also provide:**
+- 3 illustration prompts (for key scenes)
+- Discussion questions for parents
+- A "what happens next?" prompt for the child to continue the story`
+    },
+    {
+        id: 65,
+        title: 'API Error Message Writer',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['api', 'error-handling', 'developer-experience'],
+        popularity: 80,
+        prompt: `Write clear, helpful API error messages for my application:
+
+**API Context:**
+- API type: [REST/GRAPHQL/GRPC/WEBSOCKET]
+- Audience: [INTERNAL DEVS/THIRD-PARTY DEVELOPERS/MIXED]
+- Product: [WHAT YOUR API DOES]
+- Style guide: [FORMAL/FRIENDLY/MINIMAL]
+
+**Error scenarios to cover:**
+[LIST YOUR ERROR CASES - e.g., invalid input, rate limited, unauthorized, resource not found, server error]
+
+**For each error, generate:**
+
+1. **HTTP status code** (with explanation of why this code)
+2. **Error code** (machine-readable, e.g., "INVALID_EMAIL_FORMAT")
+3. **Message** (human-readable, developer-friendly)
+4. **Description** (detailed explanation of what went wrong)
+5. **How to fix** (actionable steps for the developer)
+6. **Example response** (JSON format):
+\`\`\`json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Brief description",
+    "details": "Longer explanation",
+    "fix": "What to do",
+    "docs": "https://docs.example.com/errors/ERROR_CODE"
+  }
+}
+\`\`\`
+
+**Principles applied:**
+- Never expose internal system details or stack traces
+- Always tell the developer what to do next
+- Include request_id for support escalation
+- Consistent format across all errors
+- Rate limit errors include retry-after header suggestion
+- Validation errors list ALL invalid fields (not just the first)
+
+**Also provide:**
+- Error code naming convention recommendation
+- Localization strategy for error messages
+- Logging recommendations (what to log server-side vs. return to client)`
+    },
+    {
+        id: 66,
+        title: 'Google Ads Copy',
+        category: 'marketing',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['google-ads', 'ppc', 'advertising'],
+        popularity: 88,
+        prompt: `Write high-converting Google Ads copy:
+
+**Campaign Details:**
+- Product/Service: [WHAT YOU'RE ADVERTISING]
+- Landing page URL: [WHERE CLICKS GO]
+- Campaign goal: [LEADS/SALES/TRAFFIC/BRAND AWARENESS]
+- Budget level: [LOW/MEDIUM/HIGH - for competition context]
+- Geographic target: [LOCATION]
+
+**Target audience:**
+- Who: [DEMOGRAPHICS AND PSYCHOGRAPHICS]
+- Search intent: [WHAT THEY'RE SEARCHING FOR WHEN THEY SEE YOUR AD]
+- Awareness level: [UNAWARE/PROBLEM-AWARE/SOLUTION-AWARE/PRODUCT-AWARE]
+
+**Primary keywords:** [LIST 5-10 TARGET KEYWORDS]
+
+**Generate for each ad format:**
+
+**1. Responsive Search Ads (RSA):**
+- 15 headlines (30 chars max each) - mix of:
+  - Keyword-focused (3-4)
+  - Benefit-focused (3-4)
+  - Urgency/CTA (2-3)
+  - Social proof (2-3)
+  - Unique value prop (2-3)
+- 4 descriptions (90 chars max each)
+- Pin recommendations (which headlines to pin to position 1/2)
+
+**2. Ad Extensions:**
+- 4 sitelink extensions (title + description)
+- 4 callout extensions
+- 2 structured snippets
+- Call extension text
+
+**3. Competitor differentiation:**
+- What makes you different from top 3 competitors
+- Counter-positioning headlines
+
+**Best practices applied:**
+- Include primary keyword in Headline 1
+- Numbers and specifics over vague claims
+- Strong CTA verbs (Get, Start, Try, Claim)
+- Emotional triggers + logical benefits`
+    },
+    {
+        id: 67,
+        title: 'Weekly Status Report',
+        category: 'productivity',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['status-report', 'update', 'work'],
+        popularity: 84,
+        prompt: `Write a clear, professional weekly status report:
+
+**Report Context:**
+- Your role: [JOB TITLE]
+- Team/Department: [YOUR TEAM]
+- Reporting to: [MANAGER/STAKEHOLDERS]
+- Report format: [EMAIL/DOCUMENT/SLACK/JIRA]
+- Week ending: [DATE]
+
+**This week's work:**
+- Completed: [LIST TASKS/DELIVERABLES FINISHED]
+- In progress: [LIST ONGOING WORK WITH % COMPLETION]
+- Blocked: [ANY BLOCKERS OR DEPENDENCIES]
+- Meetings/Collaboration: [KEY MEETINGS OR DISCUSSIONS]
+
+**Generate a status report with:**
+
+1. **TL;DR** (3 bullet points - biggest wins this week)
+2. **Completed this week:**
+   - Task description → Impact/Result
+   - Metrics if applicable
+3. **In progress:**
+   - Task → Expected completion date → Current status (on track/at risk/behind)
+4. **Blockers & Risks:**
+   - What's blocked → Who/what can unblock → Impact if not resolved
+5. **Next week's priorities:**
+   - Top 3 goals (specific, measurable)
+   - Key deadlines
+6. **Decisions needed:**
+   - Any items requiring manager input
+7. **Wins & Learnings:**
+   - One highlight to celebrate
+   - One thing learned or improved
+
+**Formatting:**
+- Use bullet points (skimmable in 30 seconds)
+- Bold the most important items
+- Traffic light status: 🟢 On track / 🟡 At risk / 🔴 Blocked
+- Keep total length under 300 words`
+    },
+    {
+        id: 68,
+        title: 'Debate Arguments Generator',
+        category: 'education',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['debate', 'arguments', 'critical-thinking'],
+        popularity: 82,
+        prompt: `Generate comprehensive debate arguments for both sides:
+
+**Debate Topic:** [THE MOTION/STATEMENT TO DEBATE]
+
+**Context:**
+- Format: [FORMAL DEBATE/CLASSROOM/ESSAY/DISCUSSION]
+- Level: [HIGH SCHOOL/UNIVERSITY/PROFESSIONAL]
+- Time per side: [IF FORMAL - SPEAKING TIME]
+- Judging criteria: [LOGIC/EVIDENCE/DELIVERY/PERSUASION]
+
+**Generate for BOTH sides (Pro & Con):**
+
+**FOR (Proposition/Affirmative):**
+1. **Opening statement** (compelling frame for your side)
+2. **Argument 1** - Strongest logical argument
+   - Claim → Evidence → Impact
+3. **Argument 2** - Emotional/moral argument
+   - Claim → Example → Why it matters
+4. **Argument 3** - Practical/economic argument
+   - Claim → Data → Real-world implication
+5. **Anticipated rebuttals** - What the other side will say + your counter
+
+**AGAINST (Opposition/Negative):**
+1. **Opening statement** (reframe the debate)
+2. **Argument 1** - Deconstruct their strongest point
+3. **Argument 2** - Alternative perspective/solution
+4. **Argument 3** - Unintended consequences argument
+5. **Anticipated rebuttals** - Counter their counters
+
+**For both sides, provide:**
+- Key statistics and studies to cite
+- Real-world examples and case studies
+- Logical fallacies to avoid (and to catch in opponent)
+- Quotable one-liners for impact
+- Closing statement (powerful final sentence)
+
+**Also include:**
+- Most common mistakes in debating this topic
+- Judge's perspective: what would be most convincing
+- Follow-up questions to prepare for`
+    },
+    {
+        id: 69,
+        title: 'Database Schema Designer',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['database', 'schema', 'architecture'],
+        popularity: 85,
+        prompt: `Design a database schema for my application:
+
+**Application Details:**
+- App type: [WHAT YOUR APP DOES - e.g., e-commerce, social network, SaaS]
+- Scale: [USERS EXPECTED - hundreds/thousands/millions]
+- Database: [POSTGRESQL/MYSQL/MONGODB/DYNAMODB/SUPABASE]
+- Key features: [LIST 5-10 CORE FEATURES]
+
+**Entities/Objects to model:**
+[LIST YOUR MAIN DATA ENTITIES - e.g., Users, Products, Orders, Reviews]
+
+**Requirements:**
+- Multi-tenancy: [YES/NO]
+- Soft delete: [YES/NO]
+- Audit trail: [YES/NO]
+- Internationalization: [YES/NO]
+- Real-time features: [YES/NO]
+
+**Generate:**
+
+1. **Entity-Relationship Diagram** (text-based/mermaid format)
+2. **Table definitions** (for each table):
+   - Column name, type, constraints
+   - Primary key, foreign keys
+   - Indexes (with reasoning)
+   - Default values
+3. **CREATE TABLE statements** (copy-paste ready SQL)
+4. **Relationships:**
+   - One-to-one, one-to-many, many-to-many
+   - Junction tables where needed
+5. **Common queries** this schema supports efficiently
+6. **Migration strategy** - Order to create tables (dependency-aware)
+7. **Performance considerations:**
+   - Denormalization opportunities
+   - Partitioning strategy (if needed)
+   - Caching layer suggestions
+8. **Enum/lookup tables** - For status fields, categories, etc.
+9. **Security:** Row-level security, sensitive data handling
+10. **Seed data** - Sample INSERT statements for testing`
+    },
+    {
+        id: 70,
+        title: 'Brand Voice Guide',
+        category: 'marketing',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['branding', 'voice', 'tone'],
+        popularity: 83,
+        prompt: `Create a comprehensive brand voice and tone guide:
+
+**Brand Details:**
+- Brand name: [YOUR BRAND]
+- Industry: [SECTOR]
+- Product/Service: [WHAT YOU OFFER]
+- Mission statement: [YOUR MISSION]
+- Target audience: [WHO YOU SERVE]
+- Competitors: [TOP 3 COMPETITORS]
+
+**Brand personality:**
+- If your brand were a person, who would it be? [CELEBRITY/ARCHETYPE]
+- 3-5 personality traits: [e.g., witty, warm, bold, reliable, innovative]
+- What your brand is NOT: [ANTI-TRAITS - e.g., not corporate, not sarcastic]
+
+**Generate a complete voice guide:**
+
+1. **Voice overview** - 1-paragraph brand voice statement
+2. **Voice pillars** (4-5 key attributes):
+   - Attribute name
+   - What it means (do this)
+   - What it doesn't mean (don't do this)
+   - Example sentence showing this trait
+3. **Tone spectrum** - How voice shifts by context:
+   - Social media → [more casual/playful]
+   - Customer support → [more empathetic/helpful]
+   - Marketing → [more persuasive/exciting]
+   - Legal/formal → [more professional/clear]
+4. **Writing rules:**
+   - Sentence length preference
+   - Jargon: use or avoid?
+   - Humor: when appropriate?
+   - Emoji usage
+   - Capitalization style
+5. **Do/Don't examples** - 10 before/after rewrites
+6. **Word bank** - Preferred words vs. words to avoid
+7. **Competitor differentiation** - How your voice stands apart
+8. **Template phrases** - Ready-to-use copy for common situations`
+    },
+    {
+        id: 71,
+        title: 'Feature Request Prioritizer',
+        category: 'business',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['product', 'prioritization', 'roadmap'],
+        popularity: 81,
+        prompt: `Help me prioritize these feature requests for my product roadmap:
+
+**Product Context:**
+- Product: [YOUR PRODUCT NAME AND DESCRIPTION]
+- Stage: [PRE-LAUNCH/EARLY/GROWTH/MATURE]
+- Team size: [NUMBER OF ENGINEERS]
+- Sprint length: [1 WEEK/2 WEEKS/4 WEEKS]
+- Current North Star metric: [KEY METRIC YOU'RE OPTIMIZING]
+
+**Feature requests to prioritize:**
+[LIST FEATURES - e.g.:
+1. Dark mode
+2. Mobile app
+3. API integrations
+4. Team collaboration
+5. Advanced analytics]
+
+**For each feature, evaluate:**
+
+1. **RICE Score:**
+   - Reach: How many users affected (per quarter)
+   - Impact: Minimal (0.25) / Low (0.5) / Medium (1) / High (2) / Massive (3)
+   - Confidence: Low (50%) / Medium (80%) / High (100%)
+   - Effort: Person-weeks to build
+
+2. **Strategic alignment:**
+   - Does it serve the North Star metric?
+   - Does it reduce churn or drive acquisition?
+   - Does it create competitive moat?
+
+3. **Urgency assessment:**
+   - Customer demand signal (# of requests, revenue at risk)
+   - Competitive pressure
+   - Technical debt implications
+
+**Output:**
+- Ranked priority list with scores
+- Recommended roadmap (Now / Next / Later / Never)
+- Quick wins (high impact, low effort)
+- "Not now" reasoning for deprioritized items
+- Dependencies between features
+- Suggested MVP scope for top 3 features`
+    },
+    {
+        id: 72,
+        title: 'Regex Explainer',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['regex', 'patterns', 'explanation'],
+        popularity: 83,
+        prompt: `Help me understand and build regular expressions:
+
+**Mode:** [EXPLAIN EXISTING / BUILD NEW / DEBUG BROKEN]
+
+**If EXPLAIN:**
+\`\`\`
+[PASTE YOUR REGEX HERE]
+\`\`\`
+- Language/Engine: [JAVASCRIPT/PYTHON/JAVA/PCRE/.NET/GO]
+
+**If BUILD NEW:**
+- What to match: [DESCRIBE IN PLAIN ENGLISH]
+- Examples that should match: [LIST 3-5 EXAMPLES]
+- Examples that should NOT match: [LIST 3-5 NON-MATCHES]
+- Language: [FOR ENGINE-SPECIFIC FEATURES]
+
+**If DEBUG:**
+- Regex: [YOUR PATTERN]
+- Input that fails: [WHAT DOESN'T WORK]
+- Expected result: [WHAT YOU WANT]
+
+**For any mode, provide:**
+
+1. **The regex** (final, working version)
+2. **Character-by-character breakdown:**
+   - Each token explained in plain English
+   - Grouping and capture groups labeled
+3. **Visual diagram** (text-based railroad diagram)
+4. **Test cases** (10 examples: 5 match, 5 don't)
+5. **Edge cases** to watch for:
+   - Empty strings
+   - Unicode/special characters
+   - Greedy vs. lazy matching issues
+   - Catastrophic backtracking risk
+6. **Performance notes** - Is this regex efficient?
+7. **Alternative approaches:**
+   - Simpler regex if possible
+   - Non-regex solution (if regex is overkill)
+8. **Common modifications** - How to adjust for slight variations
+9. **Code snippet** - Ready-to-use in your language with proper escaping`
+    },
+    {
+        id: 73,
+        title: 'Event Planning Checklist',
+        category: 'productivity',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['event', 'planning', 'checklist'],
+        popularity: 80,
+        prompt: `Create a comprehensive event planning checklist:
+
+**Event Details:**
+- Event type: [CONFERENCE/WORKSHOP/PARTY/WEDDING/CORPORATE/MEETUP/WEBINAR]
+- Expected attendees: [NUMBER]
+- Date: [WHEN]
+- Duration: [HOURS/DAYS]
+- Format: [IN-PERSON/VIRTUAL/HYBRID]
+- Budget: [RANGE]
+- Venue: [TYPE OR SPECIFIC LOCATION]
+
+**Generate a timeline-based checklist:**
+
+**12+ weeks before:**
+- [ ] Define goals and success metrics
+- [ ] Set budget breakdown (venue, catering, speakers, marketing, contingency)
+- [ ] Book venue/platform
+- [ ] Identify speakers/entertainment
+- [ ] Create event branding
+
+**8-12 weeks before:**
+- [ ] Open registration
+- [ ] Launch marketing campaign
+- [ ] Confirm vendors (catering, AV, photography)
+- [ ] Plan agenda/schedule
+- [ ] Arrange sponsorships
+
+**4-8 weeks before:**
+- [ ] Send speaker briefs
+- [ ] Finalize menu/catering
+- [ ] Create attendee communications
+- [ ] Plan logistics (parking, signage, wifi)
+- [ ] Prepare contingency plans
+
+**1-4 weeks before:**
+- [ ] Final headcount to vendors
+- [ ] Print materials/badges
+- [ ] Briefing for staff/volunteers
+- [ ] Tech rehearsal (if virtual/hybrid)
+- [ ] Send final reminders to attendees
+
+**Day-of checklist:**
+- [ ] Venue walkthrough
+- [ ] AV check
+- [ ] Registration desk setup
+- [ ] Emergency contacts handy
+
+**Post-event:**
+- [ ] Send thank-you emails
+- [ ] Collect feedback surveys
+- [ ] Share photos/recordings
+- [ ] Budget reconciliation
+- [ ] Debrief and lessons learned
+
+**Customize based on:** [YOUR SPECIFIC NEEDS]`
+    },
+    {
+        id: 74,
+        title: 'Academic Paper Abstract',
+        category: 'education',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['academic', 'research', 'abstract'],
+        popularity: 79,
+        prompt: `Write a compelling academic paper abstract:
+
+**Paper Details:**
+- Title: [YOUR PAPER TITLE]
+- Field/Discipline: [e.g., Computer Science, Psychology, Economics]
+- Paper type: [EMPIRICAL/THEORETICAL/REVIEW/CASE STUDY/META-ANALYSIS]
+- Target journal/conference: [WHERE YOU PLAN TO SUBMIT]
+- Word limit: [TYPICALLY 150-300 WORDS]
+
+**Content to summarize:**
+- Research question/Problem: [WHAT GAP IN KNOWLEDGE YOU ADDRESS]
+- Methodology: [HOW YOU INVESTIGATED - experiments, surveys, analysis, etc.]
+- Key findings: [MAIN RESULTS WITH NUMBERS]
+- Significance: [WHY THIS MATTERS TO THE FIELD]
+- Sample/Data: [PARTICIPANTS, DATASET, TIME PERIOD]
+
+**Generate an abstract following this structure:**
+
+1. **Background/Context** (1-2 sentences)
+   - What is the broader problem?
+   - What gap exists in current research?
+
+2. **Purpose/Objective** (1 sentence)
+   - "This study aims to..." / "We investigate..."
+
+3. **Method** (2-3 sentences)
+   - Design, participants/data, analysis approach
+   - Key variables or measures
+
+4. **Results** (2-3 sentences)
+   - Primary findings with specific numbers
+   - Statistical significance indicators
+   - Unexpected findings (if any)
+
+5. **Conclusion/Implications** (1-2 sentences)
+   - What this means for the field
+   - Practical applications
+   - Future research directions
+
+**Also provide:**
+- 5-7 keywords (for indexing)
+- Suggested highlights (3-5 bullet points for journal submission)
+- One-sentence "elevator pitch" of the paper
+- Title alternatives (if current title could be stronger)`
+    },
+    {
+        id: 75,
+        title: 'Sales Objection Handler',
+        category: 'sales',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['objections', 'sales', 'closing'],
+        popularity: 87,
+        prompt: `Create responses to common sales objections for my product:
+
+**Product/Service:** [WHAT YOU SELL]
+**Price point:** [COST]
+**Target buyer:** [DECISION MAKER TITLE/TYPE]
+**Sales stage:** [COLD OUTREACH/DEMO/PROPOSAL/NEGOTIATION/CLOSE]
+**Industry:** [YOUR INDUSTRY]
+
+**Common objections to handle:**
+1. "It's too expensive" / "We don't have budget"
+2. "We're happy with our current solution"
+3. "I need to think about it" / "Send me more info"
+4. "We're not ready right now" / "Maybe next quarter"
+5. "I need to check with my team/boss"
+6. [ADD YOUR SPECIFIC OBJECTION]
+7. [ADD YOUR SPECIFIC OBJECTION]
+
+**For each objection, provide:**
+
+1. **Why they say it** - The real concern behind the words
+2. **Acknowledge** - Validate without agreeing (never argue)
+3. **Reframe** - Shift perspective with a question
+4. **Respond** - 2-3 response options (soft/medium/direct)
+5. **Evidence** - Social proof or data point to share
+6. **Next step** - How to advance the conversation
+7. **If they still object** - Graceful fallback / long-term play
+
+**Response style:** [CONSULTATIVE/CHALLENGER/SOLUTION-SELLING]
+
+**Also include:**
+- Objection prevention tips (address before they come up)
+- Discovery questions that eliminate objections early
+- Email follow-up template for each objection type
+- When to walk away (not every deal is worth saving)
+- Framework: Feel → Felt → Found method examples`
+    },
+    {
+        id: 76,
+        title: 'Privacy Policy Generator',
+        category: 'legal',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['privacy', 'policy', 'compliance'],
+        popularity: 78,
+        prompt: `Generate a privacy policy for my website/app:
+
+**Business Details:**
+- Company/App name: [NAME]
+- Website URL: [URL]
+- Type of service: [E-COMMERCE/SAAS/BLOG/MOBILE APP/MARKETPLACE]
+- Country/Region: [FOR LEGAL COMPLIANCE - US/EU/UK/GLOBAL]
+- Target users: [GENERAL/CHILDREN/B2B]
+
+**Data Collection:**
+- Personal data collected: [EMAIL/NAME/PHONE/ADDRESS/PAYMENT/IP/COOKIES]
+- Collection method: [FORMS/COOKIES/ANALYTICS/THIRD-PARTY/AUTO-COLLECTED]
+- Purpose of collection: [ACCOUNT CREATION/MARKETING/ANALYTICS/PERSONALIZATION]
+- Third-party sharing: [WHO YOU SHARE DATA WITH - analytics, ads, payment processors]
+- Data storage: [WHERE - cloud provider, country]
+- Retention period: [HOW LONG YOU KEEP DATA]
+
+**Features/Integrations:**
+- Analytics: [GOOGLE ANALYTICS/MIXPANEL/CUSTOM]
+- Advertising: [GOOGLE ADS/FACEBOOK PIXEL/NONE]
+- Payment processing: [STRIPE/PAYPAL/NONE]
+- Email marketing: [MAILCHIMP/CONVERTKIT/NONE]
+- Social login: [GOOGLE/FACEBOOK/APPLE/NONE]
+- Cookies used: [YES - types / NO]
+
+**Generate a policy that includes:**
+
+1. Information we collect (and how)
+2. How we use your information
+3. Information sharing and disclosure
+4. Cookies and tracking technologies
+5. Data security measures
+6. Your privacy rights (GDPR/CCPA as applicable)
+7. Children's privacy (COPPA if applicable)
+8. Data retention and deletion
+9. International data transfers
+10. Changes to this policy
+11. Contact information
+12. Effective date
+
+**Compliance frameworks:** [GDPR/CCPA/PIPEDA/LGPD - based on your audience]
+
+⚠️ This is a template starting point. Have a qualified attorney review before publishing.`
+    },
+    {
+        id: 77,
+        title: 'Meal Prep Plan',
+        category: 'health',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['meal-prep', 'nutrition', 'cooking'],
+        popularity: 85,
+        prompt: `Create a weekly meal prep plan optimized for time and nutrition:
+
+**My Details:**
+- Meals to prep: [BREAKFAST/LUNCH/DINNER/SNACKS - which ones?]
+- Days to cover: [5 WORKDAYS/FULL 7 DAYS]
+- Prep day: [SUNDAY/SATURDAY/TWO SHORTER SESSIONS]
+- Max prep time: [1 HOUR/2 HOURS/3 HOURS]
+- People eating: [NUMBER]
+- Kitchen equipment: [OVEN/STOVETOP/INSTANT POT/AIR FRYER/SHEET PAN]
+- Storage: [FRIDGE ONLY (3-4 days) / FREEZER AVAILABLE (longer)]
+
+**Dietary needs:**
+- Style: [OMNIVORE/VEGETARIAN/VEGAN/KETO/PALEO/HIGH-PROTEIN]
+- Allergies: [LIST ANY]
+- Calories/day: [TARGET OR "flexible"]
+- Protein goal: [GRAMS/DAY IF TRACKING]
+- Budget: [$/WEEK]
+- Foods I don't like: [LIST]
+
+**Generate:**
+
+1. **The Menu** - What you'll eat each day (5-7 days)
+   - Breakfast | Lunch | Dinner | Snack
+   - Avoid repetition (max 2x same meal per week)
+
+2. **Master Grocery List** (organized by store section):
+   - Produce | Protein | Dairy | Pantry | Frozen
+
+3. **Prep Day Timeline** (hour-by-hour):
+   - What to start first (longest cook time)
+   - What to prep simultaneously
+   - Assembly order
+   - Cool-down and storage sequence
+
+4. **Storage Instructions:**
+   - Container recommendations
+   - What freezes well vs. fridge only
+   - Reheating instructions per meal
+   - Freshness timeline (eat by day X)
+
+5. **Nutrition summary:** Daily averages (cal/protein/carb/fat)
+6. **Shopping cost estimate**
+7. **Substitution options** (if store is out of something)
+8. **Leftover rescue ideas** (repurpose extras creatively)`
+    },
+    {
+        id: 78,
+        title: 'Code Refactoring Guide',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['refactoring', 'clean-code', 'best-practices'],
+        popularity: 86,
+        prompt: `Refactor this code to be cleaner, more maintainable, and more performant:
+
+**Code to refactor:**
+\`\`\`[LANGUAGE]
+[PASTE YOUR CODE HERE]
+\`\`\`
+
+**Context:**
+- Language/Framework: [LANGUAGE + VERSION]
+- Project type: [WEB APP/API/CLI/LIBRARY/MICROSERVICE]
+- Code age: [NEW/LEGACY/INHERITED]
+- Test coverage: [YES WITH TESTS/NO TESTS/PARTIAL]
+- Team style guide: [IF ANY - e.g., airbnb, google, standard]
+- Performance requirements: [ANY SPECIFIC CONSTRAINTS]
+
+**Refactoring goals (prioritize):**
+- [ ] Readability (easier to understand)
+- [ ] Maintainability (easier to change)
+- [ ] Performance (faster execution)
+- [ ] Testability (easier to unit test)
+- [ ] Reusability (extract shared logic)
+- [ ] Type safety (stronger typing)
+- [ ] Error handling (more robust)
+
+**Please provide:**
+
+1. **Refactored code** (complete, working version)
+2. **Change summary** - What was changed and why (bullet points)
+3. **Design patterns applied** - Name the patterns used
+4. **Code smells found** in the original:
+   - Smell name → Location → Fix applied
+5. **Before/After comparison** for key sections
+6. **Performance impact** - Any measurable improvements
+7. **Potential risks** - What could break (regression awareness)
+8. **Test suggestions** - Unit tests to add for refactored code
+9. **Further improvements** - What to tackle in a follow-up PR
+10. **SOLID principles** - Which principles were violated/applied
+
+**Rules:**
+- Preserve all existing behavior (no functional changes)
+- Keep the refactoring atomic (one concern per change)
+- Add comments only where logic is genuinely complex`
+    },
+    {
+        id: 79,
+        title: 'Investor Update Email',
+        category: 'business',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['investor', 'startup', 'update'],
+        popularity: 82,
+        prompt: `Write a monthly/quarterly investor update email:
+
+**Company Details:**
+- Company name: [YOUR STARTUP]
+- Stage: [PRE-SEED/SEED/SERIES A/SERIES B+]
+- Industry: [SECTOR]
+- Months since last raise: [NUMBER]
+- Next fundraise timeline: [IF APPLICABLE]
+
+**This period's metrics:**
+- Revenue/MRR: [CURRENT] (vs. last period: [PREVIOUS])
+- Growth rate: [MoM OR QoQ %]
+- Users/Customers: [NUMBER]
+- Burn rate: [MONTHLY SPEND]
+- Runway: [MONTHS REMAINING]
+- Key metric: [YOUR NORTH STAR - e.g., DAU, NRR, GMV]
+
+**Highlights:**
+- Top wins: [2-3 BIGGEST ACHIEVEMENTS]
+- Key hires: [NEW TEAM MEMBERS]
+- Product milestones: [WHAT YOU SHIPPED]
+- Press/Awards: [ANY COVERAGE]
+
+**Challenges:**
+- What's hard right now: [HONEST ASSESSMENT]
+- What you're doing about it: [YOUR PLAN]
+
+**Generate an investor update with:**
+
+1. **Subject line** (clear, professional: "Company Name - Month Year Update")
+2. **TL;DR** (3 bullets - the headline metrics)
+3. **Metrics dashboard** (formatted table/visual)
+4. **Wins section** (celebrate momentum)
+5. **Challenges section** (be transparent - investors respect honesty)
+6. **Product update** (what shipped, what's next)
+7. **Team update** (hires, org changes)
+8. **Asks** (specific, actionable):
+   - Intros needed
+   - Hiring help
+   - Customer referrals
+   - Advice on specific decisions
+9. **Looking ahead** (next 30/60/90 day priorities)
+10. **Closing** (gratitude, next update date)
+
+**Tone:** Confident but honest. Data-driven. Brief. Respectful of their time.`
+    },
+    {
+        id: 80,
+        title: 'TikTok Script Writer',
+        category: 'marketing',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['tiktok', 'video', 'short-form'],
+        popularity: 90,
+        prompt: `Write a viral TikTok video script:
+
+**Video Details:**
+- Niche: [YOUR CONTENT NICHE]
+- Topic: [SPECIFIC SUBJECT OF THIS VIDEO]
+- Video length: [15 SEC/30 SEC/60 SEC/3 MIN]
+- Style: [TALKING HEAD/TUTORIAL/STORYTIME/SKIT/TRENDING AUDIO/GREEN SCREEN]
+- Goal: [VIEWS/FOLLOWERS/SALES/EDUCATION/ENTERTAINMENT]
+
+**Account context:**
+- Follower count: [FOR CONTENT CALIBRATION]
+- Target audience: [AGE/INTERESTS/PROBLEMS]
+- Brand voice: [FUNNY/PROFESSIONAL/EDGY/WHOLESOME/SARCASTIC]
+- Product to promote: [IF APPLICABLE - OR "no product"]
+
+**Generate a complete video script:**
+
+1. **Hook** (first 1-3 seconds - CRITICAL):
+   - Visual hook (what's on screen)
+   - Audio hook (first words spoken)
+   - Text overlay hook
+   - Why this stops the scroll
+
+2. **Body** (main content):
+   - Second-by-second breakdown:
+     - [0:00-0:03] Hook
+     - [0:03-0:08] Setup/context
+     - [0:08-0:25] Main content/value
+     - [0:25-0:30] Payoff/CTA
+   - B-roll/visual suggestions for each section
+   - Text overlays for each section
+
+3. **CTA** (last 2-5 seconds):
+   - What action you want (follow, comment, share, link in bio)
+   - How to drive it naturally (not "follow for more")
+
+4. **Captions:** Written out caption with hashtags (3-5 relevant)
+5. **Audio suggestion:** Trending sound or original audio direction
+6. **Posting strategy:**
+   - Best time to post
+   - First comment to pin
+   - Reply strategy for engagement
+
+**TikTok algorithm tips applied:**
+- High watch-through rate (loop-worthy ending)
+- Encourages comments (controversial take, question, "which one?")
+- Shareable (relatable, surprising, or useful)
+- Text on screen (most watch without sound)
+
+**Generate 3 variations** of the same concept for A/B testing.`
+    },
 ];
 
 // Compute real category counts after PROMPTS is defined
