@@ -12,6 +12,7 @@
     <meta property="og:description" content="500+ curated AI prompt templates. Works with ChatGPT, Claude, Gemini, and more.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://summerlv.github.io/promptbetter/">
+    <meta property="og:image" content="https://summerlv.github.io/promptbetter/og-image.svg">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://summerlv.github.io/promptbetter/">
@@ -20,6 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="PromptBetter - Free AI Prompt Templates">
     <meta name="twitter:description" content="500+ curated AI prompt templates for every use case.">
+    <meta name="twitter:image" content="https://summerlv.github.io/promptbetter/og-image.svg">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
@@ -77,8 +79,15 @@
         }
     </script>
 
-    <!-- Google Analytics (placeholder - replace with actual ID) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+    <!-- Google Analytics 4 - UNCOMMENT AND REPLACE G-XXXXXXXXXX WITH YOUR ID
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
 
     <style>
         /* === CSS Custom Properties for Dark Mode === */
@@ -586,5 +595,22 @@
 
     <script src="src/prompts/data.js"></script>
     <script src="src/app.js"></script>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-50 hidden">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm">We use cookies to improve your experience. By continuing, you agree to our <a href="privacy.html" class="underline">Privacy Policy</a>.</p>
+            <button onclick="acceptCookies()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap">Accept</button>
+        </div>
+    </div>
+    <script>
+    if (!localStorage.getItem('pb_cookies_accepted')) {
+        document.getElementById('cookie-banner').classList.remove('hidden');
+    }
+    function acceptCookies() {
+        localStorage.setItem('pb_cookies_accepted', 'true');
+        document.getElementById('cookie-banner').classList.add('hidden');
+    }
+    </script>
 </body>
 </html>
