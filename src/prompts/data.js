@@ -2,19 +2,27 @@
 // Categories and prompts database
 
 const CATEGORIES = [
-    { id: 'writing', name: 'Writing', icon: '✍️', count: 85, desc: 'Blog posts, emails, copy, stories' },
-    { id: 'coding', name: 'Coding', icon: '💻', count: 72, desc: 'Debug, refactor, generate, explain' },
-    { id: 'marketing', name: 'Marketing', icon: '📈', count: 65, desc: 'SEO, ads, social media, funnels' },
-    { id: 'business', name: 'Business', icon: '💼', count: 58, desc: 'Strategy, analysis, planning' },
-    { id: 'education', name: 'Education', icon: '📚', count: 45, desc: 'Teaching, learning, tutoring' },
-    { id: 'creative', name: 'Creative', icon: '🎨', count: 52, desc: 'Art, design, brainstorming' },
-    { id: 'productivity', name: 'Productivity', icon: '⚡', count: 40, desc: 'Workflows, automation, planning' },
-    { id: 'data', name: 'Data & Analytics', icon: '📊', count: 35, desc: 'SQL, analysis, visualization' },
-    { id: 'sales', name: 'Sales', icon: '🎯', count: 30, desc: 'Outreach, proposals, closing' },
-    { id: 'hr', name: 'HR & Career', icon: '👤', count: 28, desc: 'Resumes, interviews, hiring' },
-    { id: 'legal', name: 'Legal', icon: '⚖️', count: 20, desc: 'Contracts, policies, compliance' },
-    { id: 'health', name: 'Health & Wellness', icon: '🏥', count: 18, desc: 'Fitness, nutrition, mental health' },
+    { id: 'writing', name: 'Writing', icon: '✍️', desc: 'Blog posts, emails, copy, stories' },
+    { id: 'coding', name: 'Coding', icon: '💻', desc: 'Debug, refactor, generate, explain' },
+    { id: 'marketing', name: 'Marketing', icon: '📈', desc: 'SEO, ads, social media, funnels' },
+    { id: 'business', name: 'Business', icon: '💼', desc: 'Strategy, analysis, planning' },
+    { id: 'education', name: 'Education', icon: '📚', desc: 'Teaching, learning, tutoring' },
+    { id: 'creative', name: 'Creative', icon: '🎨', desc: 'Art, design, brainstorming' },
+    { id: 'productivity', name: 'Productivity', icon: '⚡', desc: 'Workflows, automation, planning' },
+    { id: 'data', name: 'Data & Analytics', icon: '📊', desc: 'SQL, analysis, visualization' },
+    { id: 'sales', name: 'Sales', icon: '🎯', desc: 'Outreach, proposals, closing' },
+    { id: 'hr', name: 'HR & Career', icon: '👤', desc: 'Resumes, interviews, hiring' },
+    { id: 'legal', name: 'Legal', icon: '⚖️', desc: 'Contracts, policies, compliance' },
+    { id: 'health', name: 'Health & Wellness', icon: '🏥', desc: 'Fitness, nutrition, mental health' },
 ];
+
+// Compute accurate category counts from actual PROMPTS data
+// (called after PROMPTS is defined, at end of file)
+function computeCategoryCounts() {
+    CATEGORIES.forEach(cat => {
+        cat.count = PROMPTS.filter(p => p.category === cat.id).length;
+    });
+}
 
 const PROMPTS = [
     // === WRITING ===
@@ -2009,3 +2017,6 @@ Generate 3 test ideas ranked by expected impact and ease of implementation.`
 - Canva/Photoshop layer suggestions`
     },
 ];
+
+// Compute real category counts after PROMPTS is defined
+computeCategoryCounts();

@@ -3,23 +3,186 @@
 // LocalStorage keys
 const LS_FAVORITES = 'pb_favorites';
 const LS_RECENT = 'pb_recent_copies';
+const LS_DARKMODE = 'pb_darkmode';
 
 // State
 let currentFilter = 'all'; // 'all', 'favorites', 'recent'
+let lazyRenderState = {
+    prompts: [],
+    rendered: 0,
+    batchSize: 6,
+    observer: null,
+    isLoading: false,
+};
 
 document.addEventListener('DOMContentLoaded', () => {
+    initDarkMode();
     injectStyles();
     renderCategories();
     renderFilterBar();
     renderPromptOfTheDay();
-    renderPrompts(PROMPTS);
+    initLazyRender(PROMPTS);
     initSearch();
     initFilters();
     initModelFilters();
     initMobileMenu();
     initBackToTop();
     handleHashNavigation();
+
+    // Reveal main content, hide skeleton
+    document.getElementById('loading-skeleton').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
 });
+
+// === FEATURE: Dark Mode ===
+function initDarkMode() {
+    const saved = localStorage.getItem(LS_DARKMODE);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+    }
+    updateDarkModeIcon();
+
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem(LS_DARKMODE)) {
+            document.documentElement.classList.toggle('dark', e.matches);
+            updateDarkModeIcon();
+        }
+    });
+
+    // Toggle button
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', toggleDarkMode);
+    }
+}
+
+function toggleDarkMode() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem(LS_DARKMODE, isDark ? 'dark' : 'light');
+    updateDarkModeIcon();
+}
+
+function updateDarkModeIcon() {
+    const icon = document.querySelector('.dark-toggle-icon');
+    if (icon) {
+        icon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    }
+}
+
+// === FEATURE: Lazy Render with IntersectionObserver ===
+function initLazyRender(prompts) {
+    lazyRenderState.prompts = prompts;
+    lazyRenderState.rendered = 0;
+
+    const grid = document.getElementById('prompts-grid');
+    grid.innerHTML = '';
+
+    // Render first batch
+    renderNextBatch();
+
+    // Set up IntersectionObserver
+    if (lazyRenderState.observer) {
+        lazyRenderState.observer.disconnect();
+    }
+
+    const sentinel = document.getElementById('scroll-sentinel');
+    if (!sentinel) return;
+
+    lazyRenderState.observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !lazyRenderState.isLoading) {
+                if (lazyRenderState.rendered < lazyRenderState.prompts.length) {
+                    lazyRenderState.isLoading = true;
+                    const loader = document.getElementById('loading-more');
+                    if (loader) loader.classList.remove('hidden');
+
+                    // Small delay for visual feedback
+                    setTimeout(() => {
+                        renderNextBatch();
+                        lazyRenderState.isLoading = false;
+                        if (loader) loader.classList.add('hidden');
+                    }, 300);
+                }
+            }
+        });
+    }, { rootMargin: '200px' });
+
+    lazyRenderState.observer.observe(sentinel);
+}
+
+function renderNextBatch() {
+    const { prompts, rendered, batchSize } = lazyRenderState;
+    const grid = document.getElementById('prompts-grid');
+    const end = Math.min(rendered + batchSize, prompts.length);
+    const batch = prompts.slice(rendered, end);
+
+    batch.forEach((p, i) => {
+        const card = createPromptCard(p, i);
+        grid.appendChild(card);
+    });
+
+    lazyRenderState.rendered = end;
+
+    // Hide load-more when all rendered
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.classList.add('hidden');
+    }
+}
+
+function createPromptCard(p, animIndex) {
+    const div = document.createElement('div');
+    div.className = `prompt-card bg-gray-50 dark:bg-[#1a1a2e] rounded-xl p-6 border border-gray-100 dark:border-gray-700 card-hover transition-all duration-200 card-entrance`;
+    div.style.animationDelay = `${animIndex * 60}ms`;
+    div.dataset.id = p.id;
+    div.dataset.category = p.category;
+    div.dataset.models = p.models.join(',');
+    div.innerHTML = `
+        <div class="flex justify-between items-start mb-3">
+            <span class="text-xs font-medium text-primary bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-full">
+                ${getCategoryIcon(p.category)} ${capitalizeFirst(p.category)}
+            </span>
+            <span class="text-xs text-gray-400">🔥 ${p.popularity}%</span>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">${p.title}</h3>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${p.prompt.substring(0, 120)}...</p>
+        <div class="flex flex-wrap gap-1 mb-4">
+            ${p.models.map(m => `<span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded">${m}</span>`).join('')}
+        </div>
+        <div class="flex gap-2">
+            <button class="copy-btn flex-1 bg-primary text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
+                    onclick="copyPromptWithPulse(this, ${p.id})">
+                📋 Copy
+            </button>
+            <button class="favorite-btn bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                    onclick="toggleFavoriteWithBounce(this, ${p.id})">
+                ${isFavorite(p.id) ? '❤️' : '🤍'}
+            </button>
+            <button class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                    onclick="viewPrompt(${p.id})">
+                👁️
+            </button>
+        </div>
+    `;
+    return div;
+}
+
+// Copy with pulse animation
+function copyPromptWithPulse(btn, id) {
+    btn.classList.add('copy-pulse');
+    setTimeout(() => btn.classList.remove('copy-pulse'), 400);
+    copyPrompt(id);
+}
+
+// Favorite with bounce animation
+function toggleFavoriteWithBounce(btn, id) {
+    toggleFavorite(id);
+    btn.innerHTML = isFavorite(id) ? '❤️' : '🤍';
+    btn.classList.add('heart-bounce');
+    setTimeout(() => btn.classList.remove('heart-bounce'), 600);
+}
 
 // === FEATURE 5: Prompt of the Day ===
 function getPromptOfTheDay() {
@@ -126,7 +289,7 @@ function showFavorites() {
                 <p class="text-sm mt-1">Click the ❤️ button on any prompt to save it here.</p>
             </div>
         `;
-        document.getElementById('load-more-btn').style.display = 'none';
+        document.getElementById('load-more-btn').classList.add('hidden');
     } else {
         renderPrompts(filtered, 20);
     }
@@ -260,14 +423,20 @@ function renderCategories() {
 
 // Render prompt cards
 function renderPrompts(prompts, limit = 9, showTimestamp = false) {
+    // When called directly (from search/filter), bypass lazy render
+    if (lazyRenderState.observer) {
+        lazyRenderState.observer.disconnect();
+    }
+
     const grid = document.getElementById('prompts-grid');
     const displayed = prompts.slice(0, limit);
 
-    grid.innerHTML = displayed.map(p => `
-        <div class="prompt-card bg-gray-50 rounded-xl p-6 border border-gray-100 card-hover transition-all duration-200 fade-in"
+    grid.innerHTML = displayed.map((p, i) => `
+        <div class="prompt-card bg-gray-50 dark:bg-[#1a1a2e] rounded-xl p-6 border border-gray-100 dark:border-gray-700 card-hover transition-all duration-200 card-entrance"
+             style="animation-delay: ${i * 60}ms"
              data-id="${p.id}" data-category="${p.category}" data-models="${p.models.join(',')}">
             <div class="flex justify-between items-start mb-3">
-                <span class="text-xs font-medium text-primary bg-indigo-50 px-2 py-1 rounded-full">
+                <span class="text-xs font-medium text-primary bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-full">
                     ${getCategoryIcon(p.category)} ${capitalizeFirst(p.category)}
                 </span>
                 <div class="flex items-center gap-2">
@@ -275,21 +444,21 @@ function renderPrompts(prompts, limit = 9, showTimestamp = false) {
                     <span class="text-xs text-gray-400">🔥 ${p.popularity}%</span>
                 </div>
             </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">${p.title}</h3>
-            <p class="text-sm text-gray-600 mb-4 line-clamp-3">${p.prompt.substring(0, 120)}...</p>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">${p.title}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${p.prompt.substring(0, 120)}...</p>
             <div class="flex flex-wrap gap-1 mb-4">
-                ${p.models.map(m => `<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded">${m}</span>`).join('')}
+                ${p.models.map(m => `<span class="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded">${m}</span>`).join('')}
             </div>
             <div class="flex gap-2">
                 <button class="copy-btn flex-1 bg-primary text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
-                        onclick="copyPrompt(${p.id})">
+                        onclick="copyPromptWithPulse(this, ${p.id})">
                     📋 Copy
                 </button>
-                <button class="favorite-btn bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 transition"
-                        onclick="toggleFavorite(${p.id}); this.innerHTML = isFavorite(${p.id}) ? '❤️' : '🤍'; if(isFavorite(${p.id})) this.classList.add('heart-pulse');">
+                <button class="favorite-btn bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                        onclick="toggleFavoriteWithBounce(this, ${p.id})">
                     ${isFavorite(p.id) ? '❤️' : '🤍'}
                 </button>
-                <button class="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 transition"
+                <button class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-3 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition"
                         onclick="viewPrompt(${p.id})">
                     👁️
                 </button>
@@ -300,9 +469,9 @@ function renderPrompts(prompts, limit = 9, showTimestamp = false) {
     // Update load more button
     const loadMoreBtn = document.getElementById('load-more-btn');
     if (prompts.length <= limit) {
-        loadMoreBtn.style.display = 'none';
+        loadMoreBtn.classList.add('hidden');
     } else {
-        loadMoreBtn.style.display = 'inline-block';
+        loadMoreBtn.classList.remove('hidden');
         loadMoreBtn.onclick = () => renderPrompts(prompts, limit + 9, showTimestamp);
     }
 }

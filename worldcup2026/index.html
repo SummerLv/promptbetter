@@ -363,6 +363,229 @@
         .standings-table tr:last-child td {
             border-bottom: none;
         }
+
+        /* Bracket Prediction Styles */
+        .bracket-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .bracket-overlay.active {
+            display: block;
+        }
+
+        .bracket-container {
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .bracket-header {
+            background: linear-gradient(135deg, #0D3B0F 0%, #1B5E20 40%, #2E7D32 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bracket-round {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            min-width: 200px;
+        }
+
+        .bracket-match {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .bracket-match:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .bracket-team {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: 2px solid transparent;
+        }
+
+        .bracket-team:hover {
+            background: rgba(76,175,80,0.08);
+        }
+
+        .bracket-team.selected {
+            background: rgba(76,175,80,0.15);
+            border-color: #4CAF50;
+        }
+
+        .bracket-team.correct {
+            background: rgba(76,175,80,0.2);
+            border-color: #2E7D32;
+        }
+
+        .bracket-team.wrong {
+            background: rgba(239,68,68,0.1);
+            border-color: #EF4444;
+            opacity: 0.6;
+        }
+
+        .bracket-team.readonly {
+            cursor: default;
+        }
+
+        .bracket-connector {
+            width: 24px;
+            border-top: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .bracket-points-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA000);
+            color: #1a1a1a;
+            font-weight: 800;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .bracket-stage-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            padding: 0.5rem;
+        }
+
+        .bracket-horizontal {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            align-items: center;
+        }
+
+        .bracket-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .prediction-lock-banner {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prediction-open-banner {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .group-pred-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .group-pred-btn {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            transition: all 0.15s;
+        }
+
+        .group-pred-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .group-pred-btn.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .bracket-tab {
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 2px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            transition: all 0.15s;
+        }
+
+        .bracket-tab:hover {
+            border-color: var(--accent);
+        }
+
+        .bracket-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .bracket-horizontal {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .bracket-stage-label {
+                writing-mode: horizontal-tb;
+                transform: none;
+                text-align: center;
+            }
+
+            .bracket-round {
+                min-width: unset;
+            }
+        }
     </style>
 
     <!-- Google AdSense Placeholder -->
@@ -448,6 +671,11 @@
                 <button onclick="openShareModal()" class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50 transition" aria-label="Share my schedule" title="Share My Schedule">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                     <span class="hidden sm:inline">Share</span>
+                </button>
+                <button onclick="openBracketPrediction()" class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-900/30 dark:text-emerald-400 dark:hover:bg-emerald-900/50 transition" aria-label="Predict bracket" title="Bracket Predictions">
+                    <span aria-hidden="true">🎯</span>
+                    <span class="hidden sm:inline">Predict</span>
+                    <span id="pred-points-badge" class="hidden bg-gold text-gray-900 text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
                 </button>
                 <button onclick="openStandingsModal()" class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-green-50 text-green-700 hover:bg-green-100 dark:bg-green-900/30 dark:text-green-400 dark:hover:bg-green-900/50 transition" aria-label="View group standings" title="Standings">
                     <span aria-hidden="true">📊</span>
@@ -608,6 +836,51 @@
             <span>Advertisement</span>
         </div>
     </main>
+
+    <!-- Bracket Prediction Overlay -->
+    <div id="bracket-overlay" class="bracket-overlay" role="dialog" aria-labelledby="bracket-title">
+        <div class="bracket-container max-w-7xl mx-auto">
+            <!-- Header -->
+            <div class="bracket-header">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div>
+                        <h2 id="bracket-title" class="text-2xl font-black">🎯 Bracket Predictions</h2>
+                        <p class="text-green-200 text-sm mt-1">Predict match winners and earn points!</p>
+                    </div>
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <div id="bracket-lock-status"></div>
+                        <div class="bracket-points-badge">
+                            <span>⭐</span>
+                            <span id="bracket-total-points">0</span>
+                            <span>pts</span>
+                        </div>
+                        <button onclick="shareBracket()" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                            📤 Share Bracket
+                        </button>
+                        <button onclick="closeBracketPrediction()" class="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg text-sm font-semibold transition" aria-label="Close bracket predictions">
+                            ✕ Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex gap-2 mb-4 flex-wrap">
+                <button class="bracket-tab active" onclick="switchBracketTab('group')" id="tab-group">Group Stage</button>
+                <button class="bracket-tab" onclick="switchBracketTab('knockout')" id="tab-knockout">Knockout Bracket</button>
+            </div>
+
+            <!-- Group Stage Predictions -->
+            <div id="bracket-group-view">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Knockout Bracket -->
+            <div id="bracket-knockout-view" class="hidden">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 dark:bg-[#0f0f23]">
@@ -1608,6 +1881,408 @@
     }
 
     // ==========================================
+    // BRACKET PREDICTION GAME
+    // ==========================================
+    let predictions = JSON.parse(localStorage.getItem('wc2026-predictions') || '{}');
+    let bracketReadOnly = false;
+
+    // Points system
+    const POINTS = {
+        group: 3,
+        group_score: 5,
+        r32: 4,
+        r16: 6,
+        qf: 8,
+        sf: 10,
+        final: 15
+    };
+
+    // Stage lock dates (predictions lock when stage begins)
+    const STAGE_LOCK_DATES = {
+        group: '2026-06-11T22:00:00Z',
+        r32: '2026-06-28T19:00:00Z',
+        r16: '2026-07-03T19:00:00Z',
+        qf: '2026-07-09T19:00:00Z',
+        sf: '2026-07-14T22:00:00Z',
+        final: '2026-07-19T20:00:00Z'
+    };
+
+    function isStageLocked(stage) {
+        const lockDate = STAGE_LOCK_DATES[stage];
+        if (!lockDate) return false;
+        return new Date() >= new Date(lockDate);
+    }
+
+    function getDaysUntilLock(stage) {
+        const lockDate = STAGE_LOCK_DATES[stage];
+        if (!lockDate) return null;
+        const diff = new Date(lockDate) - new Date();
+        if (diff <= 0) return 0;
+        return Math.ceil(diff / (1000 * 60 * 60 * 24));
+    }
+
+    function savePredictions() {
+        localStorage.setItem('wc2026-predictions', JSON.stringify(predictions));
+        updatePredictionPoints();
+    }
+
+    function setPrediction(matchId, value) {
+        const match = matches.find(m => m.id === matchId);
+        if (!match || bracketReadOnly) return;
+        if (isStageLocked(match.stage)) return;
+        predictions[matchId] = value;
+        savePredictions();
+        renderBracketView();
+    }
+
+    function calculatePoints() {
+        let total = 0;
+        for (const [matchIdStr, pred] of Object.entries(predictions)) {
+            const matchId = parseInt(matchIdStr);
+            const match = matches.find(m => m.id === matchId);
+            if (!match) continue;
+
+            const score = matchScores[matchId];
+            if (!score || score.home === '' || score.away === '') continue;
+
+            const h = parseInt(score.home);
+            const a = parseInt(score.away);
+            if (isNaN(h) || isNaN(a)) continue;
+
+            // Determine actual winner
+            let actualWinner;
+            if (h > a) actualWinner = '1'; // team1 wins
+            else if (a > h) actualWinner = '2'; // team2 wins
+            else actualWinner = 'draw';
+
+            if (match.stage === 'group') {
+                // Group stage: predict winner (1, 2, draw)
+                if (pred === actualWinner) {
+                    total += POINTS.group;
+                }
+                // Bonus for correct score prediction
+                if (predictions[`${matchId}_score`]) {
+                    const predScore = predictions[`${matchId}_score`];
+                    if (predScore.home === h && predScore.away === a) {
+                        total += POINTS.group_score;
+                    }
+                }
+            } else {
+                // Knockout: predict advancing team (1 or 2)
+                const advancer = h >= a ? '1' : '2'; // in knockout, no draw (higher score advances)
+                if (pred === advancer) {
+                    total += POINTS[match.stage] || 0;
+                }
+            }
+        }
+        return total;
+    }
+
+    function updatePredictionPoints() {
+        const points = calculatePoints();
+        document.getElementById('bracket-total-points').textContent = points;
+        const badge = document.getElementById('pred-points-badge');
+        if (points > 0) {
+            badge.textContent = points;
+            badge.classList.remove('hidden');
+            badge.classList.add('flex');
+        } else if (Object.keys(predictions).length > 0) {
+            badge.textContent = '✓';
+            badge.classList.remove('hidden');
+            badge.classList.add('flex');
+        } else {
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+        }
+    }
+
+    function openBracketPrediction() {
+        // Check for shared bracket in URL
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('bracket')) {
+            try {
+                const shared = JSON.parse(atob(params.get('bracket')));
+                predictions = shared;
+                bracketReadOnly = true;
+            } catch (e) {
+                bracketReadOnly = false;
+            }
+        } else {
+            bracketReadOnly = false;
+        }
+
+        document.getElementById('bracket-overlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        renderBracketView();
+        updateBracketLockStatus();
+    }
+
+    function closeBracketPrediction() {
+        document.getElementById('bracket-overlay').classList.remove('active');
+        document.body.style.overflow = '';
+        // Clear URL params if shared
+        if (window.location.search.includes('bracket=')) {
+            window.history.replaceState({}, '', window.location.pathname);
+            bracketReadOnly = false;
+            predictions = JSON.parse(localStorage.getItem('wc2026-predictions') || '{}');
+        }
+    }
+
+    function switchBracketTab(tab) {
+        document.getElementById('tab-group').classList.toggle('active', tab === 'group');
+        document.getElementById('tab-knockout').classList.toggle('active', tab === 'knockout');
+        document.getElementById('bracket-group-view').classList.toggle('hidden', tab !== 'group');
+        document.getElementById('bracket-knockout-view').classList.toggle('hidden', tab !== 'knockout');
+    }
+
+    function updateBracketLockStatus() {
+        const container = document.getElementById('bracket-lock-status');
+        if (bracketReadOnly) {
+            container.innerHTML = '<span class="prediction-lock-banner">👁️ Viewing shared bracket (read-only)</span>';
+            return;
+        }
+
+        const now = new Date();
+        const tournamentStart = new Date('2026-06-11T22:00:00Z');
+
+        if (now < tournamentStart) {
+            const days = getDaysUntilLock('group');
+            container.innerHTML = `<span class="prediction-open-banner">🔓 Predictions lock in ${days} days</span>`;
+        } else {
+            // Show which stages are locked
+            const stages = ['group', 'r32', 'r16', 'qf', 'sf', 'final'];
+            const nextOpen = stages.find(s => !isStageLocked(s));
+            if (nextOpen) {
+                const days = getDaysUntilLock(nextOpen);
+                container.innerHTML = `<span class="prediction-open-banner">🔓 ${getStageName(nextOpen)} locks in ${days} days</span>`;
+            } else {
+                container.innerHTML = '<span class="prediction-lock-banner">🔒 All predictions locked</span>';
+            }
+        }
+    }
+
+    function renderBracketView() {
+        renderGroupPredictions();
+        renderKnockoutBracket();
+        updatePredictionPoints();
+    }
+
+    function renderGroupPredictions() {
+        const container = document.getElementById('bracket-group-view');
+        const groupMatches = matches.filter(m => m.stage === 'group');
+        const groups = {};
+        groupMatches.forEach(m => {
+            if (!groups[m.group]) groups[m.group] = [];
+            groups[m.group].push(m);
+        });
+
+        const locked = isStageLocked('group');
+        let html = '';
+
+        if (locked && !bracketReadOnly) {
+            html += '<div class="mb-4"><span class="prediction-lock-banner">🔒 Group stage predictions are locked</span></div>';
+        }
+
+        for (const [group, gMatches] of Object.entries(groups).sort()) {
+            html += `
+                <div class="mb-6">
+                    <h4 class="font-bold text-sm mb-2" style="color: var(--accent)">Group ${group}</h4>
+                    <div class="space-y-2">
+            `;
+
+            gMatches.forEach(match => {
+                const pred = predictions[match.id];
+                const score = matchScores[match.id];
+                const hasResult = score && score.home !== '' && score.away !== '';
+                let actualWinner = null;
+                if (hasResult) {
+                    const h = parseInt(score.home);
+                    const a = parseInt(score.away);
+                    if (h > a) actualWinner = '1';
+                    else if (a > h) actualWinner = '2';
+                    else actualWinner = 'draw';
+                }
+
+                const isCorrect = hasResult && pred === actualWinner;
+                const isWrong = hasResult && pred && pred !== actualWinner;
+                const disabled = locked || bracketReadOnly;
+
+                html += `
+                    <div class="group-pred-row ${isCorrect ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : ''} ${isWrong ? 'border-red-300 bg-red-50 dark:bg-red-900/20' : ''}">
+                        <span class="text-sm">${match.flag1}</span>
+                        <span class="text-xs font-medium flex-1" style="color: var(--text-primary)">${match.team1}</span>
+                        <div class="flex gap-1">
+                            <button class="group-pred-btn ${pred === '1' ? 'selected' : ''}" ${disabled ? 'disabled' : ''} onclick="setPrediction(${match.id}, '1')">1</button>
+                            <button class="group-pred-btn ${pred === 'draw' ? 'selected' : ''}" ${disabled ? 'disabled' : ''} onclick="setPrediction(${match.id}, 'draw')">X</button>
+                            <button class="group-pred-btn ${pred === '2' ? 'selected' : ''}" ${disabled ? 'disabled' : ''} onclick="setPrediction(${match.id}, '2')">2</button>
+                        </div>
+                        <span class="text-xs font-medium flex-1 text-right" style="color: var(--text-primary)">${match.team2}</span>
+                        <span class="text-sm">${match.flag2}</span>
+                        ${hasResult ? `<span class="text-xs font-bold ml-2" style="color: var(--accent)">${score.home}-${score.away}</span>` : ''}
+                        ${isCorrect ? '<span class="text-xs ml-1">✅</span>' : ''}
+                        ${isWrong ? '<span class="text-xs ml-1">❌</span>' : ''}
+                    </div>
+                `;
+            });
+
+            html += '</div></div>';
+        }
+
+        container.innerHTML = html;
+    }
+
+    function renderKnockoutBracket() {
+        const container = document.getElementById('bracket-knockout-view');
+        const knockoutStages = ['r32', 'r16', 'qf', 'sf', 'final'];
+        const isMobile = window.innerWidth < 768;
+
+        let html = '';
+
+        if (isMobile) {
+            // Vertical layout for mobile
+            html += '<div class="bracket-vertical">';
+            knockoutStages.forEach(stage => {
+                const stageMatches = matches.filter(m => m.stage === stage);
+                if (stageMatches.length === 0) return;
+                const locked = isStageLocked(stage);
+
+                html += `
+                    <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-2">
+                            <h4 class="font-bold text-sm" style="color: var(--accent)">${getStageName(stage)}</h4>
+                            ${locked ? '<span class="text-xs">🔒</span>' : `<span class="text-xs" style="color: var(--text-muted)">${getDaysUntilLock(stage) || 0}d left</span>`}
+                        </div>
+                        <div class="space-y-2">
+                `;
+
+                stageMatches.forEach(match => {
+                    html += renderBracketMatch(match, stage, locked);
+                });
+
+                html += '</div></div>';
+            });
+            html += '</div>';
+        } else {
+            // Horizontal bracket layout for desktop
+            html += '<div class="bracket-horizontal">';
+            knockoutStages.forEach(stage => {
+                const stageMatches = matches.filter(m => m.stage === stage);
+                if (stageMatches.length === 0) return;
+                const locked = isStageLocked(stage);
+
+                html += `
+                    <div class="bracket-round">
+                        <div class="text-center mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--accent)">${getStageName(stage)}</span>
+                            ${locked ? '<span class="text-xs ml-1">🔒</span>' : ''}
+                        </div>
+                `;
+
+                stageMatches.forEach(match => {
+                    html += renderBracketMatch(match, stage, locked);
+                });
+
+                html += '</div>';
+
+                // Add connector between rounds (except after final)
+                if (stage !== 'final') {
+                    html += '<div class="flex items-center"><div class="bracket-connector"></div></div>';
+                }
+            });
+            html += '</div>';
+        }
+
+        container.innerHTML = html;
+    }
+
+    function renderBracketMatch(match, stage, locked) {
+        const pred = predictions[match.id];
+        const score = matchScores[match.id];
+        const hasResult = score && score.home !== '' && score.away !== '';
+        let actualAdvancer = null;
+        if (hasResult) {
+            const h = parseInt(score.home);
+            const a = parseInt(score.away);
+            actualAdvancer = h >= a ? '1' : '2';
+        }
+
+        const disabled = locked || bracketReadOnly;
+
+        const team1Class = pred === '1'
+            ? (hasResult ? (actualAdvancer === '1' ? 'correct' : 'wrong') : 'selected')
+            : '';
+        const team2Class = pred === '2'
+            ? (hasResult ? (actualAdvancer === '2' ? 'correct' : 'wrong') : 'selected')
+            : '';
+        const eliminatedT1 = hasResult && actualAdvancer === '2' ? 'opacity-50 line-through' : '';
+        const eliminatedT2 = hasResult && actualAdvancer === '1' ? 'opacity-50 line-through' : '';
+
+        return `
+            <div class="bracket-match">
+                <div class="bracket-team ${team1Class} ${disabled ? 'readonly' : ''}" ${!disabled ? `onclick="setPrediction(${match.id}, '1')"` : ''}>
+                    <span class="text-base">${match.flag1}</span>
+                    <span class="text-xs font-semibold ${eliminatedT1}" style="color: var(--text-primary)">${match.team1}</span>
+                    ${pred === '1' && !hasResult ? '<span class="ml-auto text-xs">✓</span>' : ''}
+                    ${hasResult && actualAdvancer === '1' ? '<span class="ml-auto text-xs">⚽</span>' : ''}
+                </div>
+                <div class="bracket-team ${team2Class} ${disabled ? 'readonly' : ''}" ${!disabled ? `onclick="setPrediction(${match.id}, '2')"` : ''}>
+                    <span class="text-base">${match.flag2}</span>
+                    <span class="text-xs font-semibold ${eliminatedT2}" style="color: var(--text-primary)">${match.team2}</span>
+                    ${pred === '2' && !hasResult ? '<span class="ml-auto text-xs">✓</span>' : ''}
+                    ${hasResult && actualAdvancer === '2' ? '<span class="ml-auto text-xs">⚽</span>' : ''}
+                </div>
+                ${hasResult ? `<div class="text-center text-xs font-bold mt-1" style="color: var(--accent)">${score.home} - ${score.away}</div>` : ''}
+            </div>
+        `;
+    }
+
+    // Shareable bracket
+    function shareBracket() {
+        const encoded = btoa(JSON.stringify(predictions));
+        const url = `${window.location.origin}${window.location.pathname}?bracket=${encoded}`;
+
+        // Show share options
+        const shareText = `🏆 My World Cup 2026 Bracket Predictions! ${calculatePoints()} points so far!\n${url}`;
+
+        if (navigator.share) {
+            navigator.share({
+                title: '🏆 My World Cup 2026 Bracket Predictions',
+                text: `Check out my bracket! ${calculatePoints()} points so far!`,
+                url: url
+            }).catch(() => {
+                copyBracketLink(url);
+            });
+        } else {
+            copyBracketLink(url);
+        }
+    }
+
+    function copyBracketLink(url) {
+        navigator.clipboard.writeText(url).then(() => {
+            alert('Bracket link copied to clipboard! Share it with friends.');
+        }).catch(() => {
+            prompt('Copy this link to share your bracket:', url);
+        });
+    }
+
+    function shareOnTwitterBracket() {
+        const encoded = btoa(JSON.stringify(predictions));
+        const url = `${window.location.origin}${window.location.pathname}?bracket=${encoded}`;
+        const text = `🏆 My World Cup 2026 Bracket Predictions! ${calculatePoints()} points so far! Check it out:`;
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        window.open(twitterUrl, '_blank', 'width=550,height=420');
+    }
+
+    // Check URL for shared bracket on load
+    function checkSharedBracket() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('bracket')) {
+            // Auto-open bracket view in read-only mode
+            setTimeout(() => openBracketPrediction(), 500);
+        }
+    }
+
+    // ==========================================
     // EVENT LISTENERS
     // ==========================================
     function initFilters() {
@@ -1643,6 +2318,7 @@
                 document.getElementById('favorites-modal').classList.remove('active');
                 document.getElementById('share-modal').classList.remove('active');
                 document.getElementById('standings-modal').classList.remove('active');
+                closeBracketPrediction();
             }
         });
     }
@@ -1659,6 +2335,8 @@
         renderMatches();
         updateCountdown();
         setInterval(updateCountdown, 1000);
+        updatePredictionPoints();
+        checkSharedBracket();
     });
     </script>
 </body>
