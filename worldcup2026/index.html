@@ -61,6 +61,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -78,8 +79,35 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+        :root {
+            --bg-primary: #f9fafb;
+            --bg-card: #ffffff;
+            --bg-header: rgba(255,255,255,0.95);
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --border-color: #e5e7eb;
+            --accent: #1B5E20;
+            --accent-light: #4CAF50;
+        }
+
+        .dark {
+            --bg-primary: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-header: rgba(22,33,62,0.95);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #334155;
+            --accent: #4CAF50;
+            --accent-light: #66BB6A;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .countdown-digit {
@@ -88,12 +116,23 @@
         }
 
         .match-card {
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
         }
 
         .match-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .match-card.favorite-highlight {
+            border-left: 4px solid #FFD700;
+            background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, var(--bg-card) 20%);
+        }
+
+        .dark .match-card.favorite-highlight {
+            background: linear-gradient(90deg, rgba(255,215,0,0.1) 0%, var(--bg-card) 20%);
         }
 
         .sticky-tz {
@@ -102,6 +141,9 @@
             z-index: 50;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            background-color: var(--bg-header);
+            border-color: var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         .gradient-hero {
@@ -118,8 +160,32 @@
             );
         }
 
+        .dark .ad-placeholder {
+            background: repeating-linear-gradient(
+                45deg,
+                #1e293b,
+                #1e293b 10px,
+                #334155 10px,
+                #334155 20px
+            );
+        }
+
         .filter-btn.active {
             background-color: #1B5E20;
+            color: white;
+        }
+
+        .dark .filter-btn {
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .dark .filter-btn:hover {
+            background-color: #334155;
+        }
+
+        .dark .filter-btn.active {
+            background-color: #4CAF50;
             color: white;
         }
 
@@ -140,16 +206,96 @@
             background: #f1f1f1;
         }
 
+        .dark ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
         ::-webkit-scrollbar-thumb {
             background: #4CAF50;
             border-radius: 4px;
+        }
+
+        /* Dark mode toggle */
+        .dark-toggle {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            font-size: 1.2rem;
+            background: transparent;
+        }
+
+        .dark-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .dark .dark-toggle:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Favorites modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+        }
+
+        .team-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+
+        .team-checkbox-label:hover {
+            background-color: rgba(76,175,80,0.1);
+        }
+
+        .next-match-banner {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+            color: #1a1a1a;
+        }
+
+        .dark select, .dark input[type="text"] {
+            background-color: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
         }
     </style>
 
     <!-- Google AdSense Placeholder -->
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gray-50 text-gray-900 dark:bg-[#1a1a2e] dark:text-gray-100">
 
     <!-- Header Ad Slot -->
     <!-- AdSense: Header Banner 728x90 -->
@@ -200,25 +346,69 @@
     </header>
 
     <!-- Sticky Timezone Selector -->
-    <div class="sticky-tz bg-white/95 border-b border-gray-200 shadow-sm">
+    <div class="sticky-tz border-b border-gray-200 dark:border-gray-700 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
             <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span class="text-sm font-medium text-gray-600">Your timezone:</span>
+                <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Your timezone:</span>
                 <select id="timezone-select" class="bg-gray-100 border border-gray-300 rounded-lg px-3 py-1.5 text-sm font-medium focus:ring-2 focus:ring-primary focus:border-primary">
                 </select>
             </div>
-            <div class="flex items-center gap-2 text-sm text-gray-500">
-                <span id="detected-tz-label"></span>
-                <button onclick="resetTimezone()" class="text-primary hover:underline font-medium">Reset to detected</button>
+            <div class="flex items-center gap-3">
+                <span id="detected-tz-label" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                <button onclick="resetTimezone()" class="text-primary hover:underline font-medium text-sm">Reset</button>
+                <div class="w-px h-5 bg-gray-300 dark:bg-gray-600"></div>
+                <button onclick="openFavoritesModal()" class="inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-yellow-50 text-yellow-700 hover:bg-yellow-100 dark:bg-yellow-900/30 dark:text-yellow-400 dark:hover:bg-yellow-900/50 transition" title="My Teams">
+                    <span>⭐</span>
+                    <span class="hidden sm:inline">My Teams</span>
+                    <span id="fav-count-badge" class="hidden bg-yellow-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"></span>
+                </button>
+                <button id="dark-mode-toggle" class="dark-toggle" title="Toggle dark mode" onclick="toggleDarkMode()">
+                    <span id="dark-mode-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="favorites-modal" class="modal-overlay" onclick="closeFavoritesModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold" style="color: var(--text-primary)">⭐ Select Your Teams</h3>
+                <button onclick="closeFavoritesModal()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+            </div>
+            <p class="text-sm mb-4" style="color: var(--text-secondary)">Matches involving your teams will be highlighted. You can also filter to show only your teams' matches.</p>
+            <div class="flex gap-2 mb-4">
+                <button onclick="selectAllTeams()" class="text-xs px-3 py-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition font-medium dark:bg-green-900/30 dark:text-green-400">Select All</button>
+                <button onclick="clearAllTeams()" class="text-xs px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition font-medium dark:bg-red-900/30 dark:text-red-400">Clear All</button>
+            </div>
+            <div id="teams-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-[50vh] overflow-y-auto">
+                <!-- Teams populated by JS -->
+            </div>
+            <div class="mt-4 pt-4 border-t" style="border-color: var(--border-color)">
+                <button onclick="saveFavorites()" class="w-full bg-primary text-white py-2.5 rounded-lg font-semibold hover:bg-primary-light transition">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Your Next Match Banner -->
+    <div id="next-match-banner" class="hidden">
+        <div class="next-match-banner">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg">⭐</span>
+                    <span class="font-bold text-sm">Your next match:</span>
+                    <span id="next-match-info" class="text-sm font-medium"></span>
+                </div>
+                <span id="next-match-time" class="text-sm font-bold"></span>
             </div>
         </div>
     </div>
 
     <!-- Streaming Partners -->
-    <div class="bg-white border-b">
+    <div class="bg-white dark:bg-[#16213e] border-b dark:border-gray-700 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
                 <span class="text-gray-500 font-medium">Watch Live:</span>
@@ -254,6 +444,7 @@
                 <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 hover:bg-gray-100 transition" data-filter="stage" data-value="qf">Quarter-Finals</button>
                 <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 hover:bg-gray-100 transition" data-filter="stage" data-value="sf">Semi-Finals</button>
                 <button class="filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-gray-300 hover:bg-gray-100 transition" data-filter="stage" data-value="final">Final</button>
+                <button id="fav-filter-btn" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-yellow-400 text-yellow-700 hover:bg-yellow-50 transition hidden" data-filter="favorites" data-value="favorites" onclick="toggleFavoritesFilter()">⭐ My Teams Only</button>
             </div>
 
             <!-- Team/Group Search -->
