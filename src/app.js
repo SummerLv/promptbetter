@@ -880,8 +880,9 @@ function initMobileMenu() {
         <a href="#categories" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">Categories</a>
         <a href="#popular" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">Popular</a>
         <a href="#models" class="block text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">AI Models</a>
-        <button onclick="showFavorites(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 hover:text-indigo-500 py-2">❤️ My Saved</button>
-        <button onclick="showRecent(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 hover:text-indigo-500 py-2">🕐 Recent</button>
+        <button onclick="toggleDarkMode(); updateDarkModeIcon();" class="block w-full text-left text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2"><span class="dark-toggle-icon-mobile">${document.documentElement.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode'}</span></button>
+        <button onclick="showFavorites(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">❤️ My Saved</button>
+        <button onclick="showRecent(); document.getElementById('popular').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.add('hidden');" class="block w-full text-left text-gray-600 dark:text-gray-300 hover:text-indigo-500 py-2">🕐 Recent</button>
         <a href="https://buymeacoffee.com/promptbetter" target="_blank" rel="noopener" class="block bg-yellow-400 text-black font-medium px-4 py-2 rounded-lg text-center">☕ Buy me a coffee</a>
     `;
     nav.parentNode.insertBefore(mobileMenu, nav.nextSibling);

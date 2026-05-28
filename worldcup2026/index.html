@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Cup 2026 Schedule in Your Time Zone | Free Converter</title>
-    <meta name="description" content="Complete FIFA World Cup 2026 schedule with automatic time zone conversion. See all 104 matches in USA, Mexico & Canada converted to your local time. Add matches to Google Calendar instantly.">
+    <title>World Cup 2026 Schedule & Predictor | Free Time Zone Converter Tool</title>
+    <meta name="description" content="Free FIFA World Cup 2026 schedule converter. See all 104 matches in your local timezone. Predict match results, track scores, and never miss a game. Works in 50+ timezones.">
     <meta name="keywords" content="world cup 2026 schedule, FIFA 2026 match times, world cup 2026 time zone converter, FIFA World Cup 2026 fixtures, world cup 2026 calendar">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://worldcup2026schedule.com/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
 
     <!-- Open Graph -->
     <meta property="og:title" content="World Cup 2026 Schedule in Your Time Zone | Free Converter">
@@ -681,6 +682,10 @@
                     <span aria-hidden="true">📊</span>
                     <span class="hidden sm:inline">Standings</span>
                 </button>
+                <button id="reminders-btn" onclick="showRemindersInfo()" class="hidden inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:bg-amber-900/50 transition" aria-label="View active reminders" title="Reminders">
+                    <span aria-hidden="true">🔔</span>
+                    <span id="reminders-count" class="bg-amber-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">0</span>
+                </button>
                 <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" onclick="toggleDarkMode()">
                     <span id="dark-mode-icon" aria-hidden="true">🌙</span>
                 </button>
@@ -881,6 +886,108 @@
             </div>
         </div>
     </div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-12 max-w-4xl mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-8 text-center" style="color: var(--text-primary)">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">When does the FIFA World Cup 2026 start?</h3>
+                <p style="color: var(--text-secondary)">The FIFA World Cup 2026 kicks off on June 11, 2026, with the opening match at Estadio Azteca in Mexico City. The tournament runs until July 19, 2026, with the final at MetLife Stadium in New York/New Jersey.</p>
+            </div>
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">How do I convert World Cup match times to my timezone?</h3>
+                <p style="color: var(--text-secondary)">Our tool automatically detects your timezone and converts all 104 match times to your local time. You can also manually select from 50+ timezones using the dropdown at the top of the page. All times update instantly.</p>
+            </div>
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">Which countries are hosting World Cup 2026?</h3>
+                <p style="color: var(--text-secondary)">World Cup 2026 is jointly hosted by the United States, Mexico, and Canada across 16 stadiums. The majority of matches will be played in the USA (60 matches), with Mexico hosting 10 and Canada hosting 10.</p>
+            </div>
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">How many teams are in World Cup 2026?</h3>
+                <p style="color: var(--text-secondary)">World Cup 2026 is the first to feature 48 teams (expanded from 32). Teams are divided into 12 groups of 4. The top two teams from each group and the 8 best third-placed teams advance to the knockout rounds, totaling 104 matches.</p>
+            </div>
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">Can I add World Cup matches to my calendar?</h3>
+                <p style="color: var(--text-secondary)">Yes! Each match has a "Google Calendar" button that adds it directly to your Google Calendar with the correct time, venue, and a 30-minute reminder. You can also download .ics files for Apple Calendar, Outlook, and other calendar apps.</p>
+            </div>
+            <div class="border rounded-xl p-5" style="border-color: var(--border-color); background: var(--bg-card)">
+                <h3 class="font-semibold text-lg mb-2" style="color: var(--text-primary)">How does the prediction game work?</h3>
+                <p style="color: var(--text-secondary)">Click the "Predict" button to open the bracket prediction game. Predict match winners for group stage (1/X/2) and knockout rounds. Earn points for correct predictions: 3 pts for group matches, 5 bonus for exact scores, and up to 15 pts for the final. Share your bracket with friends to compare!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Embed Countdown Widget -->
+    <div class="max-w-4xl mx-auto px-4 pb-12">
+        <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold mb-2" style="color: var(--text-primary)">📋 Embed Countdown on Your Site</h3>
+            <p class="text-sm mb-4" style="color: var(--text-secondary)">Copy this code to add a World Cup 2026 countdown widget to your website:</p>
+            <pre class="bg-white dark:bg-gray-900 border rounded-lg p-4 text-xs overflow-x-auto mb-4" style="border-color: var(--border-color); color: var(--text-primary)"><code id="embed-code">&lt;iframe src="https://summerlv.github.io/promptbetter/worldcup2026/?embed=countdown" width="300" height="200" frameborder="0" style="border-radius:12px;overflow:hidden"&gt;&lt;/iframe&gt;</code></pre>
+            <button onclick="copyEmbedCode()" id="copy-embed-btn" class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-light transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                <span id="copy-embed-text">Copy Code</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- FAQ Schema JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "When does the FIFA World Cup 2026 start?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The FIFA World Cup 2026 kicks off on June 11, 2026, with the opening match at Estadio Azteca in Mexico City. The tournament runs until July 19, 2026, with the final at MetLife Stadium in New York/New Jersey."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I convert World Cup match times to my timezone?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our tool automatically detects your timezone and converts all 104 match times to your local time. You can also manually select from 50+ timezones using the dropdown at the top of the page."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which countries are hosting World Cup 2026?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "World Cup 2026 is jointly hosted by the United States, Mexico, and Canada across 16 stadiums. The majority of matches will be played in the USA (60 matches), with Mexico hosting 10 and Canada hosting 10."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many teams are in World Cup 2026?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "World Cup 2026 is the first to feature 48 teams (expanded from 32). Teams are divided into 12 groups of 4, totaling 104 matches."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I add World Cup matches to my calendar?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Each match has a Google Calendar button and downloadable .ics files for Apple Calendar, Outlook, and other calendar apps. A 30-minute reminder is included."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does the prediction game work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Click the Predict button to open the bracket prediction game. Predict match winners and earn points: 3 pts for group matches, 5 bonus for exact scores, and up to 15 pts for the final. Share your bracket with friends to compare!"
+                }
+            }
+        ]
+    }
+    </script>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 dark:bg-[#0f0f23]">
@@ -1803,6 +1910,13 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
                                     </svg>
                                     <span class="hidden sm:inline">.ics</span>
+                                </button>
+                                <button onclick="toggleReminder(${match.id})" id="remind-btn-${match.id}"
+                                   class="inline-flex items-center gap-1 text-xs ${isReminderSet(match.id) ? 'bg-amber-200 text-amber-800 dark:bg-amber-800 dark:text-amber-200' : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'} px-3 py-1.5 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/50 transition font-medium"
+                                   aria-label="Set reminder for ${match.team1} vs ${match.team2}"
+                                   title="${isReminderSet(match.id) ? 'Remove reminder' : 'Remind me 15 min before'}">
+                                    <span>${isReminderSet(match.id) ? '🔔' : '🔕'}</span>
+                                    <span class="hidden sm:inline">${isReminderSet(match.id) ? 'Set' : 'Remind'}</span>
                                 </button>` : ''}
                             </div>
                         </div>
@@ -2283,6 +2397,162 @@
     }
 
     // ==========================================
+    // MATCH REMINDERS (Notification API)
+    // ==========================================
+    let reminders = JSON.parse(localStorage.getItem('wc2026-reminders') || '{}');
+    let reminderCheckInterval = null;
+
+    function isReminderSet(matchId) {
+        return !!reminders[matchId];
+    }
+
+    function toggleReminder(matchId) {
+        if (isReminderSet(matchId)) {
+            // Remove reminder
+            delete reminders[matchId];
+            localStorage.setItem('wc2026-reminders', JSON.stringify(reminders));
+            updateRemindersBadge();
+            renderMatches();
+            return;
+        }
+
+        // Request notification permission if needed
+        if (!('Notification' in window)) {
+            alert('Your browser does not support notifications. Try Chrome, Firefox, or Edge.');
+            return;
+        }
+
+        if (Notification.permission === 'denied') {
+            alert('Notifications are blocked. Please enable them in your browser settings for this site.');
+            return;
+        }
+
+        if (Notification.permission === 'default') {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    setReminder(matchId);
+                } else {
+                    alert('Notification permission is required for match reminders.');
+                }
+            });
+        } else {
+            setReminder(matchId);
+        }
+    }
+
+    function setReminder(matchId) {
+        const match = matches.find(m => m.id === matchId);
+        if (!match) return;
+
+        reminders[matchId] = {
+            matchDate: match.date,
+            team1: match.team1,
+            team2: match.team2,
+            flag1: match.flag1,
+            flag2: match.flag2,
+            venue: match.venue
+        };
+        localStorage.setItem('wc2026-reminders', JSON.stringify(reminders));
+        updateRemindersBadge();
+        renderMatches();
+    }
+
+    function updateRemindersBadge() {
+        const btn = document.getElementById('reminders-btn');
+        const countEl = document.getElementById('reminders-count');
+        const now = new Date();
+        // Count only future reminders
+        const activeCount = Object.values(reminders).filter(r => new Date(r.matchDate) > now).length;
+
+        if (activeCount > 0) {
+            btn.classList.remove('hidden');
+            btn.classList.add('inline-flex');
+            countEl.textContent = activeCount;
+        } else {
+            btn.classList.add('hidden');
+            btn.classList.remove('inline-flex');
+        }
+    }
+
+    function showRemindersInfo() {
+        const now = new Date();
+        const activeReminders = Object.entries(reminders)
+            .filter(([_, r]) => new Date(r.matchDate) > now)
+            .sort((a, b) => new Date(a[1].matchDate) - new Date(b[1].matchDate));
+
+        if (activeReminders.length === 0) {
+            alert('No active reminders. Click 🔕 on upcoming matches to set reminders.');
+            return;
+        }
+
+        let msg = '🔔 Active Reminders:\n\n';
+        activeReminders.forEach(([id, r]) => {
+            const time = formatMatchTime(r.matchDate);
+            msg += `⚽ ${r.team1} vs ${r.team2}\n   ${time}\n\n`;
+        });
+        msg += 'You\'ll get a notification 15 minutes before each match (if this page is open).';
+        alert(msg);
+    }
+
+    function checkReminders() {
+        if (Notification.permission !== 'granted') return;
+        const now = new Date();
+        const fifteenMinMs = 15 * 60 * 1000;
+
+        for (const [matchId, reminder] of Object.entries(reminders)) {
+            const matchTime = new Date(reminder.matchDate);
+            const diff = matchTime - now;
+
+            // Trigger notification 15 minutes before (with 30 sec window)
+            if (diff > 0 && diff <= fifteenMinMs && diff > fifteenMinMs - 30000) {
+                new Notification(`⚽ ${reminder.team1} vs ${reminder.team2}`, {
+                    body: `Match starts in 15 minutes!\n🏟️ ${reminder.venue}`,
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⚽</text></svg>',
+                    tag: `wc2026-${matchId}`,
+                    requireInteraction: true
+                });
+            }
+
+            // Clean up past reminders
+            if (diff < -fifteenMinMs) {
+                delete reminders[matchId];
+                localStorage.setItem('wc2026-reminders', JSON.stringify(reminders));
+                updateRemindersBadge();
+            }
+        }
+    }
+
+    function initReminders() {
+        updateRemindersBadge();
+        // Check every 30 seconds
+        reminderCheckInterval = setInterval(checkReminders, 30000);
+    }
+
+    // ==========================================
+    // EMBED CODE COPY
+    // ==========================================
+    function copyEmbedCode() {
+        const code = document.getElementById('embed-code').textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            document.getElementById('copy-embed-text').textContent = '✓ Copied!';
+            setTimeout(() => {
+                document.getElementById('copy-embed-text').textContent = 'Copy Code';
+            }, 2000);
+        }).catch(() => {
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            document.getElementById('copy-embed-text').textContent = '✓ Copied!';
+            setTimeout(() => {
+                document.getElementById('copy-embed-text').textContent = 'Copy Code';
+            }, 2000);
+        });
+    }
+
+    // ==========================================
     // EVENT LISTENERS
     // ==========================================
     function initFilters() {
@@ -2331,6 +2601,7 @@
         initTimezoneSelector();
         initFilters();
         initFavorites();
+        initReminders();
         updateStandingsData();
         renderMatches();
         updateCountdown();
