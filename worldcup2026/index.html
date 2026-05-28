@@ -483,7 +483,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300">
+    <footer class="bg-gray-900 text-gray-300 dark:bg-[#0f0f23]">
         <!-- Footer Ad Slot -->
         <!-- AdSense: Footer Banner 728x90 -->
         <div class="ad-placeholder w-full h-[90px] flex items-center justify-center text-gray-500 text-sm border-b border-gray-800">
@@ -611,6 +611,241 @@
     ];
 
     // ==========================================
+    // ALL TEAMS (for favorites selection)
+    // ==========================================
+    const allTeams = [
+        { name: "Argentina", flag: "🇦🇷" }, { name: "Australia", flag: "🇦🇺" },
+        { name: "Belgium", flag: "🇧🇪" }, { name: "Brazil", flag: "🇧🇷" },
+        { name: "Cameroon", flag: "🇨🇲" }, { name: "Canada", flag: "🇨🇦" },
+        { name: "Costa Rica", flag: "🇨🇷" }, { name: "Croatia", flag: "🇭🇷" },
+        { name: "Denmark", flag: "🇩🇰" }, { name: "Ecuador", flag: "🇪🇨" },
+        { name: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿" }, { name: "France", flag: "🇫🇷" },
+        { name: "Germany", flag: "🇩🇪" }, { name: "Ghana", flag: "🇬🇭" },
+        { name: "Iran", flag: "🇮🇷" }, { name: "Japan", flag: "🇯🇵" },
+        { name: "Mexico", flag: "🇲🇽" }, { name: "Morocco", flag: "🇲🇦" },
+        { name: "Netherlands", flag: "🇳🇱" }, { name: "Peru", flag: "🇵🇪" },
+        { name: "Poland", flag: "🇵🇱" }, { name: "Portugal", flag: "🇵🇹" },
+        { name: "Saudi Arabia", flag: "🇸🇦" }, { name: "Senegal", flag: "🇸🇳" },
+        { name: "Serbia", flag: "🇷🇸" }, { name: "South Korea", flag: "🇰🇷" },
+        { name: "Spain", flag: "🇪🇸" }, { name: "Switzerland", flag: "🇨🇭" },
+        { name: "Tunisia", flag: "🇹🇳" }, { name: "Uruguay", flag: "🇺🇾" },
+        { name: "USA", flag: "🇺🇸" }, { name: "Wales", flag: "🏴󠁧󠁢󠁷󠁬󠁳󠁿" },
+    ];
+
+    // ==========================================
+    // DARK MODE
+    // ==========================================
+    function initDarkMode() {
+        const stored = localStorage.getItem('wc2026-darkmode');
+        let isDark = false;
+        if (stored !== null) {
+            isDark = stored === 'true';
+        } else {
+            isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        applyDarkMode(isDark);
+
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (localStorage.getItem('wc2026-darkmode') === null) {
+                applyDarkMode(e.matches);
+            }
+        });
+    }
+
+    function applyDarkMode(isDark) {
+        document.documentElement.classList.toggle('dark', isDark);
+        document.getElementById('dark-mode-icon').textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleDarkMode() {
+        const isDark = !document.documentElement.classList.contains('dark');
+        localStorage.setItem('wc2026-darkmode', isDark);
+        applyDarkMode(isDark);
+    }
+
+    // ==========================================
+    // FAVORITE TEAMS
+    // ==========================================
+    let favoriteTeams = JSON.parse(localStorage.getItem('wc2026-favorites') || '[]');
+    let showFavoritesOnly = false;
+
+    function initFavorites() {
+        populateTeamsGrid();
+        updateFavoriteBadge();
+        updateNextMatchBanner();
+        updateFavFilterVisibility();
+    }
+
+    function populateTeamsGrid() {
+        const grid = document.getElementById('teams-grid');
+        grid.innerHTML = allTeams.map(team => `
+            <label class="team-checkbox-label">
+                <input type="checkbox" class="team-checkbox w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+                       value="${team.name}" ${favoriteTeams.includes(team.name) ? 'checked' : ''}>
+                <span class="text-lg">${team.flag}</span>
+                <span class="text-sm font-medium" style="color: var(--text-primary)">${team.name}</span>
+            </label>
+        `).join('');
+    }
+
+    function openFavoritesModal() {
+        populateTeamsGrid();
+        document.getElementById('favorites-modal').classList.add('active');
+    }
+
+    function closeFavoritesModal(e) {
+        if (e && e.target !== e.currentTarget) return;
+        document.getElementById('favorites-modal').classList.remove('active');
+    }
+
+    function selectAllTeams() {
+        document.querySelectorAll('.team-checkbox').forEach(cb => cb.checked = true);
+    }
+
+    function clearAllTeams() {
+        document.querySelectorAll('.team-checkbox').forEach(cb => cb.checked = false);
+    }
+
+    function saveFavorites() {
+        favoriteTeams = Array.from(document.querySelectorAll('.team-checkbox:checked')).map(cb => cb.value);
+        localStorage.setItem('wc2026-favorites', JSON.stringify(favoriteTeams));
+        document.getElementById('favorites-modal').classList.remove('active');
+        updateFavoriteBadge();
+        updateNextMatchBanner();
+        updateFavFilterVisibility();
+        renderMatches();
+    }
+
+    function updateFavoriteBadge() {
+        const badge = document.getElementById('fav-count-badge');
+        if (favoriteTeams.length > 0) {
+            badge.textContent = favoriteTeams.length;
+            badge.classList.remove('hidden');
+            badge.classList.add('flex');
+        } else {
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+        }
+    }
+
+    function updateFavFilterVisibility() {
+        const btn = document.getElementById('fav-filter-btn');
+        if (favoriteTeams.length > 0) {
+            btn.classList.remove('hidden');
+        } else {
+            btn.classList.add('hidden');
+            showFavoritesOnly = false;
+        }
+    }
+
+    function toggleFavoritesFilter() {
+        showFavoritesOnly = !showFavoritesOnly;
+        const btn = document.getElementById('fav-filter-btn');
+        btn.classList.toggle('active', showFavoritesOnly);
+        if (showFavoritesOnly) {
+            btn.style.backgroundColor = '#FFD700';
+            btn.style.color = '#1a1a1a';
+            btn.style.borderColor = '#FFD700';
+        } else {
+            btn.style.backgroundColor = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        }
+        renderMatches();
+    }
+
+    function isMatchFavorite(match) {
+        if (favoriteTeams.length === 0) return false;
+        return favoriteTeams.includes(match.team1) || favoriteTeams.includes(match.team2);
+    }
+
+    function updateNextMatchBanner() {
+        const banner = document.getElementById('next-match-banner');
+        if (favoriteTeams.length === 0) {
+            banner.classList.add('hidden');
+            return;
+        }
+
+        const now = new Date();
+        const sortedMatches = [...matches].sort((a, b) => new Date(a.date) - new Date(b.date));
+        let nextFavMatch = null;
+        for (const match of sortedMatches) {
+            if (new Date(match.date) > now && isMatchFavorite(match)) {
+                nextFavMatch = match;
+                break;
+            }
+        }
+
+        if (!nextFavMatch) {
+            banner.classList.add('hidden');
+            return;
+        }
+
+        banner.classList.remove('hidden');
+        document.getElementById('next-match-info').textContent =
+            `${nextFavMatch.flag1} ${nextFavMatch.team1} vs ${nextFavMatch.team2} ${nextFavMatch.flag2}`;
+        document.getElementById('next-match-time').textContent = formatMatchTime(nextFavMatch.date);
+    }
+
+    // ==========================================
+    // .ICS CALENDAR EXPORT
+    // ==========================================
+    function generateICS(match) {
+        const startDate = new Date(match.date);
+        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // +2 hours
+        const reminderDate = new Date(startDate.getTime() - 30 * 60 * 1000); // -30 min
+
+        const formatICS = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+
+        const stageName = getStageName(match.stage);
+        const groupInfo = match.group !== '-' ? ` - Group ${match.group}` : '';
+        const uid = `wc2026-match-${match.id}@worldcup2026schedule.com`;
+
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//World Cup 2026 Schedule//EN',
+            'CALSCALE:GREGORIAN',
+            'METHOD:PUBLISH',
+            'BEGIN:VEVENT',
+            `UID:${uid}`,
+            `DTSTART:${formatICS(startDate)}`,
+            `DTEND:${formatICS(endDate)}`,
+            `SUMMARY:⚽ ${match.team1} vs ${match.team2} - FIFA World Cup 2026`,
+            `DESCRIPTION:FIFA World Cup 2026 ${stageName}${groupInfo}\\n\\nVenue: ${match.venue}\\, ${match.city}\\n\\nWatch live on FuboTV\\, Peacock\\, or ESPN+`,
+            `LOCATION:${match.venue}\\, ${match.city}`,
+            'STATUS:CONFIRMED',
+            'BEGIN:VALARM',
+            'TRIGGER:-PT30M',
+            'ACTION:DISPLAY',
+            `DESCRIPTION:⚽ ${match.team1} vs ${match.team2} starts in 30 minutes!`,
+            'END:VALARM',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\r\n');
+
+        return icsContent;
+    }
+
+    function downloadICS(matchId) {
+        const match = matches.find(m => m.id === matchId);
+        if (!match) return;
+
+        const icsContent = generateICS(match);
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `worldcup2026-${match.team1.replace(/\s+/g, '')}-vs-${match.team2.replace(/\s+/g, '')}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+
+    // ==========================================
     // TIMEZONE HANDLING
     // ==========================================
     const commonTimezones = [
@@ -639,7 +874,6 @@
         commonTimezones.forEach(tz => {
             const opt = document.createElement('option');
             opt.value = tz;
-            opt.textContent = tz.replace(/_/g, ' ').replace('America/', '').replace('Europe/', '').replace('Asia/', '').replace('Africa/', '').replace('Australia/', '').replace('Pacific/', '');
             opt.textContent = tz.replace(/_/g, ' ');
             if (tz === currentTimezone) opt.selected = true;
             optGroupCommon.appendChild(opt);
@@ -664,6 +898,7 @@
         select.addEventListener('change', (e) => {
             currentTimezone = e.target.value;
             renderMatches();
+            updateNextMatchBanner();
         });
 
         document.getElementById('detected-tz-label').textContent = `Detected: ${detectedTimezone.replace(/_/g, ' ')}`;
@@ -673,6 +908,7 @@
         currentTimezone = detectedTimezone;
         document.getElementById('timezone-select').value = detectedTimezone;
         renderMatches();
+        updateNextMatchBanner();
     }
 
     function formatMatchTime(isoDate) {
@@ -747,14 +983,14 @@
 
     function getStageColor(stage) {
         const colors = {
-            group: 'bg-green-100 text-green-800',
-            r32: 'bg-blue-100 text-blue-800',
-            r16: 'bg-purple-100 text-purple-800',
-            qf: 'bg-orange-100 text-orange-800',
-            sf: 'bg-red-100 text-red-800',
-            final: 'bg-yellow-100 text-yellow-800'
+            group: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
+            r32: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400',
+            r16: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+            qf: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
+            sf: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400',
+            final: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
         };
-        return colors[stage] || 'bg-gray-100 text-gray-800';
+        return colors[stage] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
     }
 
     function filterMatches() {
@@ -765,6 +1001,7 @@
                 const search = activeTeamSearch.toLowerCase();
                 if (!match.team1.toLowerCase().includes(search) && !match.team2.toLowerCase().includes(search)) return false;
             }
+            if (showFavoritesOnly && !isMatchFavorite(match)) return false;
             return true;
         });
     }
@@ -775,8 +1012,8 @@
 
         if (filtered.length === 0) {
             container.innerHTML = `
-                <div class="text-center py-16 text-gray-500">
-                    <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="text-center py-16" style="color: var(--text-muted)">
+                    <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                     <p class="text-lg font-medium">No matches found</p>
@@ -800,9 +1037,9 @@
             html += `
                 <div class="mb-8">
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="h-px flex-1 bg-gray-200"></div>
-                        <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider whitespace-nowrap">${date}</h2>
-                        <div class="h-px flex-1 bg-gray-200"></div>
+                        <div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div>
+                        <h2 class="text-sm font-bold uppercase tracking-wider whitespace-nowrap" style="color: var(--text-secondary)">${date}</h2>
+                        <div class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></div>
                     </div>
                     <div class="grid gap-3">
             `;
@@ -810,13 +1047,15 @@
             dateMatches.forEach(match => {
                 const isUpcoming = new Date(match.date) > new Date();
                 const isFinal = match.id === 68;
+                const isFav = isMatchFavorite(match);
 
                 html += `
-                    <div class="match-card bg-white rounded-xl border ${isFinal ? 'border-gold ring-2 ring-gold/30' : 'border-gray-200'} p-4 md:p-5 shadow-sm">
+                    <div class="match-card rounded-xl border ${isFinal ? 'border-gold ring-2 ring-gold/30' : ''} ${isFav ? 'favorite-highlight' : ''} p-4 md:p-5 shadow-sm">
                         <div class="flex flex-col md:flex-row md:items-center gap-3">
-                            <!-- Time -->
-                            <div class="flex items-center gap-2 md:w-32 shrink-0">
-                                <span class="text-lg font-bold text-primary">${formatMatchTimeOnly(match.date)}</span>
+                            <!-- Fav indicator + Time -->
+                            <div class="flex items-center gap-2 md:w-36 shrink-0">
+                                ${isFav ? '<span class="text-sm">⭐</span>' : ''}
+                                <span class="text-lg font-bold" style="color: var(--accent)">${formatMatchTimeOnly(match.date)}</span>
                             </div>
 
                             <!-- Teams -->
@@ -824,11 +1063,11 @@
                                 <div class="flex items-center gap-3">
                                     <div class="flex items-center gap-2 flex-1">
                                         <span class="text-xl">${match.flag1}</span>
-                                        <span class="font-semibold text-gray-900">${match.team1}</span>
+                                        <span class="font-semibold" style="color: var(--text-primary)">${match.team1}</span>
                                     </div>
-                                    <span class="text-xs font-bold text-gray-400 px-2">VS</span>
+                                    <span class="text-xs font-bold px-2" style="color: var(--text-muted)">VS</span>
                                     <div class="flex items-center gap-2 flex-1 justify-end md:justify-start">
-                                        <span class="font-semibold text-gray-900">${match.team2}</span>
+                                        <span class="font-semibold" style="color: var(--text-primary)">${match.team2}</span>
                                         <span class="text-xl">${match.flag2}</span>
                                     </div>
                                 </div>
@@ -839,25 +1078,33 @@
                                 <span class="text-xs px-2 py-1 rounded-full font-medium ${getStageColor(match.stage)}">
                                     ${getStageName(match.stage)}${match.group !== '-' ? ' · Grp ' + match.group : ''}
                                 </span>
-                                <span class="text-xs text-gray-500 hidden lg:inline">${match.venue}, ${match.city}</span>
+                                <span class="text-xs hidden lg:inline" style="color: var(--text-secondary)">${match.venue}, ${match.city}</span>
                             </div>
 
                             <!-- Actions -->
                             <div class="flex items-center gap-2 shrink-0">
                                 ${isUpcoming ? `
                                 <a href="${generateGoogleCalendarLink(match)}" target="_blank" rel="noopener"
-                                   class="inline-flex items-center gap-1 text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition font-medium"
+                                   class="inline-flex items-center gap-1 text-xs bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition font-medium"
                                    title="Add to Google Calendar">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
-                                    <span class="hidden sm:inline">Calendar</span>
-                                </a>` : ''}
+                                    <span class="hidden sm:inline">Google</span>
+                                </a>
+                                <button onclick="downloadICS(${match.id})"
+                                   class="inline-flex items-center gap-1 text-xs bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400 px-3 py-1.5 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/50 transition font-medium"
+                                   title="Download .ics file (Apple Calendar, Outlook)">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                    <span class="hidden sm:inline">.ics</span>
+                                </button>` : ''}
                             </div>
                         </div>
                         <!-- Venue on mobile -->
                         <div class="mt-2 lg:hidden">
-                            <span class="text-xs text-gray-500">🏟️ ${match.venue}, ${match.city}</span>
+                            <span class="text-xs" style="color: var(--text-secondary)">🏟️ ${match.venue}, ${match.city}</span>
                         </div>
                     </div>
                 `;
@@ -904,7 +1151,7 @@
         const diff = target - now;
 
         if (diff <= 0) {
-            setTimeout(updateCountdown, 100); // Avoid synchronous recursion
+            setTimeout(updateCountdown, 100);
             return;
         }
 
@@ -958,14 +1205,23 @@
                 renderMatches();
             }, 200);
         });
+
+        // Close modal on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('favorites-modal').classList.remove('active');
+            }
+        });
     }
 
     // ==========================================
     // INITIALIZATION
     // ==========================================
     document.addEventListener('DOMContentLoaded', () => {
+        initDarkMode();
         initTimezoneSelector();
         initFilters();
+        initFavorites();
         renderMatches();
         updateCountdown();
         setInterval(updateCountdown, 1000);
