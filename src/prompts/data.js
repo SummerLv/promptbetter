@@ -753,4 +753,512 @@ Do NOT:
 - Start with "Thread:" or "🧵"
 - Be generic or obvious`
     },
+
+    // === MORE CODING ===
+    {
+        id: 26,
+        title: 'React Component Builder',
+        category: 'coding',
+        models: ['claude', 'chatgpt'],
+        tags: ['react', 'frontend', 'component'],
+        popularity: 91,
+        prompt: `Build a production-ready React component:
+
+Component Name: [NAME]
+Purpose: [WHAT IT DOES]
+Props: [LIST EXPECTED PROPS]
+State: [WHAT STATE IT MANAGES]
+
+Requirements:
+1. TypeScript with proper interfaces
+2. Responsive design (mobile-first)
+3. Accessible (ARIA labels, keyboard navigation)
+4. Error boundary handling
+5. Loading and empty states
+6. Unit tests (React Testing Library)
+7. Storybook story (if applicable)
+8. Performance optimized (useMemo/useCallback where appropriate)
+
+Include:
+- The component file
+- Types/interfaces file
+- Test file
+- CSS/styled-components
+- Usage example
+
+Follow React best practices: composition over inheritance, controlled components, proper effect cleanup.`
+    },
+    {
+        id: 27,
+        title: 'Python Script Automator',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['python', 'automation', 'script'],
+        popularity: 89,
+        prompt: `Write a Python automation script for:
+
+Task: [WHAT TO AUTOMATE]
+Input: [WHAT DATA/FILES IT PROCESSES]
+Output: [EXPECTED RESULT]
+Schedule: [ONE-TIME/RECURRING]
+
+Requirements:
+- Python 3.10+
+- Proper error handling with try/except
+- Logging (use logging module, not print)
+- Configuration via environment variables or config file
+- Progress indicators for long operations
+- Dry-run mode option
+- Type hints throughout
+- Docstrings for all functions
+- requirements.txt for dependencies
+- A brief README with usage instructions
+
+Handle edge cases:
+- Empty input
+- Network failures (with retry logic)
+- File permission issues
+- Keyboard interrupt (graceful shutdown)`
+    },
+    {
+        id: 28,
+        title: 'Git Commit Message Writer',
+        category: 'coding',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['git', 'workflow', 'commits'],
+        popularity: 84,
+        prompt: `Write a clear, conventional commit message for these changes:
+
+Changes made:
+[DESCRIBE WHAT YOU CHANGED]
+
+Files affected:
+[LIST FILES]
+
+Context:
+[WHY THESE CHANGES WERE NEEDED]
+
+Follow Conventional Commits format:
+type(scope): subject
+
+body
+
+footer
+
+Types: feat, fix, docs, style, refactor, perf, test, chore, ci, build
+- Subject: imperative mood, lowercase, no period, under 50 chars
+- Body: explain what and why, not how. Wrap at 72 chars.
+- Footer: breaking changes, issue references
+
+Provide 3 options from concise to detailed.`
+    },
+
+    // === MORE PRODUCTIVITY ===
+    {
+        id: 29,
+        title: 'Weekly Planning Assistant',
+        category: 'productivity',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['planning', 'weekly', 'goals'],
+        popularity: 87,
+        prompt: `Help me plan my upcoming week. Here's my context:
+
+**Top 3 priorities this week:**
+1. [PRIORITY 1]
+2. [PRIORITY 2]
+3. [PRIORITY 3]
+
+**Recurring commitments:**
+[MEETINGS, CLASSES, ROUTINES]
+
+**Deadlines this week:**
+[LIST DEADLINES WITH DATES]
+
+**Energy patterns:**
+[WHEN AM I MOST PRODUCTIVE? MORNING/AFTERNOON/EVENING]
+
+Please create:
+1. **Monday-Friday time blocks** - Allocate focused work, meetings, breaks
+2. **Daily Top 3** - Most important task for each day
+3. **Buffer time** - When to handle unexpected items
+4. **Weekend prep** - What to prepare Sunday evening
+5. **Success metrics** - How I'll know the week was productive
+
+Rules:
+- No back-to-back deep work blocks (max 90 min then break)
+- Schedule hardest tasks during my peak energy
+- Include buffer for unexpected tasks (20% of time)
+- Batch similar tasks together`
+    },
+    {
+        id: 30,
+        title: 'Decision Matrix Builder',
+        category: 'productivity',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['decisions', 'framework', 'analysis'],
+        popularity: 83,
+        prompt: `Help me make a decision using a weighted decision matrix.
+
+Decision: [WHAT I'M DECIDING BETWEEN]
+
+Options:
+1. [OPTION A]
+2. [OPTION B]
+3. [OPTION C]
+
+Factors I care about:
+[LIST FACTORS - e.g., cost, time, quality, risk, scalability]
+
+For each factor:
+1. Assign a weight (1-10) based on importance
+2. Score each option (1-10) on that factor
+3. Calculate weighted scores
+4. Present as a clear table
+
+Also provide:
+- Gut check: Does the "winner" feel right? If not, what's missing?
+- Reversibility analysis: Which decisions are easily reversed?
+- 10/10/10 rule: How will I feel about this in 10 minutes/10 months/10 years?
+- Pre-mortem: If I choose the winner and it fails, what went wrong?`
+    },
+
+    // === MORE MARKETING ===
+    {
+        id: 31,
+        title: 'Product Hunt Launch Plan',
+        category: 'marketing',
+        models: ['chatgpt', 'claude'],
+        tags: ['product-hunt', 'launch', 'growth'],
+        popularity: 88,
+        prompt: `Create a complete Product Hunt launch strategy for:
+
+Product: [NAME AND DESCRIPTION]
+Category: [PH CATEGORY]
+Target audience: [WHO USES IT]
+Unique value: [WHY IT'S DIFFERENT]
+Launch date: [DATE]
+
+Deliver:
+1. **Pre-launch (2 weeks before)**
+   - Teaser content calendar
+   - Hunter outreach template
+   - Early access signup strategy
+   - Maker community engagement plan
+
+2. **Launch day**
+   - Optimal posting time
+   - Tagline (max 60 chars, benefit-focused)
+   - Description (first comment strategy)
+   - Gallery images checklist
+   - First hour action plan
+   - Upvote request templates (non-spammy)
+
+3. **Post-launch (48 hours)**
+   - Comment response templates
+   - Social media amplification
+   - Follow-up with commenters
+   - Metrics to track
+
+4. **Assets needed**
+   - Logo (240x240)
+   - Gallery images (5 max)
+   - Maker video script (30 sec)
+   - First comment copy`
+    },
+    {
+        id: 32,
+        title: 'Newsletter Writer',
+        category: 'marketing',
+        models: ['chatgpt', 'claude'],
+        tags: ['newsletter', 'email', 'content'],
+        popularity: 84,
+        prompt: `Write this week's newsletter edition:
+
+Newsletter name: [NAME]
+Topic/Theme: [THIS WEEK'S FOCUS]
+Audience: [WHO READS THIS]
+Tone: [PROFESSIONAL/CASUAL/WITTY]
+Length: [SHORT <500 words / MEDIUM 500-1000 / LONG 1000+]
+
+Structure:
+1. **Subject line** (3 options - aim for 40% open rate)
+2. **Preview text** (supporting the subject line)
+3. **Opening hook** - Personal anecdote or timely reference
+4. **Main content** - [NUMBER] key points/stories
+5. **Actionable takeaway** - One thing readers can do TODAY
+6. **CTA** - Reply, share, or visit link
+7. **Sign-off** - Personal, memorable
+
+Extras to include:
+- One relevant link/resource
+- One quote or stat
+- One personal opinion or hot take
+
+Make it feel like a smart friend sharing insights, not a corporate update.`
+    },
+
+    // === MORE CREATIVE ===
+    {
+        id: 33,
+        title: 'Logo Concept Generator',
+        category: 'creative',
+        models: ['chatgpt', 'claude'],
+        tags: ['logo', 'branding', 'design'],
+        popularity: 85,
+        prompt: `Generate 5 logo concepts for:
+
+Brand Name: [NAME]
+Industry: [SECTOR]
+Brand Values: [3-5 ADJECTIVES]
+Target Audience: [WHO]
+Competitors: [SIMILAR BRANDS TO DIFFERENTIATE FROM]
+Color Preferences: [ANY/NONE]
+
+For each concept, describe:
+1. **Visual description** - What the logo looks like in detail
+2. **Symbolism** - Why this design represents the brand
+3. **Style** - Wordmark/lettermark/icon/combination/emblem
+4. **Color palette** - Primary + secondary with hex codes
+5. **Typography** - Font style recommendation
+6. **Versatility** - How it works on dark/light, small/large
+7. **Midjourney prompt** - A prompt to generate a rough version
+
+Consider:
+- Scalability (favicon to billboard)
+- Cultural sensitivity
+- Trademark uniqueness
+- Digital-first readability`
+    },
+    {
+        id: 34,
+        title: 'UX Copy Writer',
+        category: 'creative',
+        models: ['chatgpt', 'claude'],
+        tags: ['ux', 'microcopy', 'ui'],
+        popularity: 82,
+        prompt: `Write UX microcopy for:
+
+Product/Feature: [DESCRIPTION]
+Platform: [WEB/MOBILE/DESKTOP]
+User action: [WHAT THE USER IS DOING]
+Brand voice: [FORMAL/CASUAL/PLAYFUL/MINIMAL]
+
+Write copy for these states:
+1. **Empty state** - First time, no data yet
+2. **Loading state** - Waiting for content
+3. **Success state** - Action completed
+4. **Error state** - Something went wrong
+5. **Confirmation dialog** - Before destructive action
+6. **Tooltip/Help text** - Explaining the feature
+7. **CTA buttons** - Primary and secondary
+8. **Onboarding step** - Introducing the feature
+
+Rules:
+- Max 2 sentences per element
+- Use active voice
+- Be specific, not vague ("Your file is saved" not "Success")
+- Include helpful next steps in errors
+- Match the user's emotional state
+- Avoid jargon`
+    },
+
+    // === MORE BUSINESS ===
+    {
+        id: 35,
+        title: 'Competitor Analysis Framework',
+        category: 'business',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['competition', 'analysis', 'market'],
+        popularity: 86,
+        prompt: `Perform a detailed competitor analysis:
+
+My Product: [YOUR PRODUCT/SERVICE]
+Competitors to analyze:
+1. [COMPETITOR 1]
+2. [COMPETITOR 2]
+3. [COMPETITOR 3]
+
+Analyze each competitor on:
+1. **Product** - Core features, pricing, unique value prop
+2. **Market Position** - Target segment, brand perception
+3. **Strengths** - What they do well
+4. **Weaknesses** - Where they fall short
+5. **Marketing** - Channels, messaging, content strategy
+6. **Technology** - Tech stack (if visible), innovation
+7. **Team** - Size, key hires, leadership
+8. **Funding/Revenue** - Known metrics
+
+Then provide:
+- **Comparison matrix** - Feature-by-feature table
+- **Gap analysis** - Opportunities they're missing
+- **Positioning map** - Where each player sits (2x2 matrix)
+- **My competitive advantages** - Where I can win
+- **Threats** - Where they could beat me
+- **Strategic recommendations** - 3 actionable moves`
+    },
+
+    // === MORE DATA ===
+    {
+        id: 36,
+        title: 'Data Visualization Advisor',
+        category: 'data',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['visualization', 'charts', 'dashboard'],
+        popularity: 81,
+        prompt: `Recommend the best data visualization for my data:
+
+Data description: [WHAT YOUR DATA CONTAINS]
+Audience: [WHO WILL SEE THIS - executives/analysts/public]
+Purpose: [COMPARE/TREND/DISTRIBUTION/RELATIONSHIP/COMPOSITION]
+Tool: [Tableau/Power BI/Excel/D3.js/Python matplotlib/etc.]
+
+I have:
+- [NUMBER] data points
+- [VARIABLES] - list the columns/fields
+- Time component: [YES/NO - time series?]
+- Categories: [HOW MANY DISTINCT GROUPS]
+
+Please recommend:
+1. **Primary chart type** with reasoning
+2. **Alternative option** for different emphasis
+3. **Color palette** suggestion (colorblind-safe)
+4. **Layout tips** - axis labels, legends, annotations
+5. **Common mistakes** to avoid with this data type
+6. **Code snippet** - Basic implementation in my tool
+7. **Storytelling tip** - What narrative does this data tell?
+
+If creating a dashboard, also suggest:
+- KPI cards to feature
+- Filter/interaction design
+- Mobile responsiveness approach`
+    },
+
+    // === GEMINI SPECIFIC ===
+    {
+        id: 37,
+        title: 'Gemini 3.5 Flash - Image Analysis',
+        category: 'creative',
+        models: ['gemini'],
+        tags: ['image', 'multimodal', 'analysis'],
+        popularity: 90,
+        prompt: `[Upload an image first, then use this prompt]
+
+Analyze this image comprehensively:
+
+1. **Description** - What's in the image? Be detailed and specific.
+2. **Text extraction** - Any visible text? Transcribe it exactly.
+3. **Objects detected** - List all identifiable objects with positions.
+4. **Colors & style** - Dominant colors, artistic style, mood.
+5. **Technical quality** - Resolution feel, lighting, composition.
+6. **Context clues** - When/where might this have been taken?
+7. **Accessibility** - Write alt-text for screen readers (under 125 chars).
+8. **Similar images** - What would I search to find similar content?
+
+Additional (if applicable):
+- Faces: Estimate emotions, but don't identify specific people
+- Documents: Extract and format any structured data
+- Products: Identify brand, model, approximate price range
+- Nature: Species identification if plants/animals visible`
+    },
+    {
+        id: 38,
+        title: 'Claude Opus 4 - Deep Research',
+        category: 'education',
+        models: ['claude'],
+        tags: ['research', 'analysis', 'deep-dive'],
+        popularity: 92,
+        prompt: `Conduct thorough research and analysis on: [TOPIC]
+
+Research Parameters:
+- Depth: [OVERVIEW / DEEP DIVE / EXPERT LEVEL]
+- Perspective: [NEUTRAL / [SPECIFIC VIEWPOINT]]
+- Time scope: [ALL TIME / LAST 5 YEARS / CURRENT]
+
+Deliverable Structure:
+1. **Executive Summary** (3 sentences)
+2. **Background & Context** - History and current state
+3. **Key Arguments/Perspectives** - Present all major viewpoints
+4. **Evidence & Data** - Statistics, studies, examples
+5. **Expert Opinions** - What do authorities say?
+6. **Counterarguments** - Steel-man opposing views
+7. **Implications** - What does this mean going forward?
+8. **Knowledge Gaps** - What's unknown or debated?
+9. **Conclusion** - Your synthesis
+10. **Sources to explore** - Where to learn more
+
+Quality standards:
+- Distinguish facts from opinions
+- Note when information may be outdated
+- Highlight areas of uncertainty
+- Cross-reference claims where possible
+- Present minority views fairly`
+    },
+
+    // === SALES ===
+    {
+        id: 39,
+        title: 'Sales Pitch Deck Outline',
+        category: 'sales',
+        models: ['chatgpt', 'claude'],
+        tags: ['pitch', 'presentation', 'b2b'],
+        popularity: 84,
+        prompt: `Create a 10-slide sales pitch deck outline for:
+
+Product/Service: [WHAT YOU'RE SELLING]
+Prospect: [COMPANY/ROLE YOU'RE PRESENTING TO]
+Deal Size: [APPROXIMATE VALUE]
+Stage: [FIRST MEETING / FOLLOW-UP / CLOSING]
+Time: [10/20/30 MINUTES]
+
+Slide-by-slide:
+1. **Title** - Company name, one-line value prop
+2. **Problem** - The pain your prospect feels (use their language)
+3. **Impact** - Cost of not solving this ($$$ or time)
+4. **Solution** - Your product in one sentence
+5. **How It Works** - 3-step process, visual
+6. **Proof** - Case study with metrics (similar company)
+7. **Differentiator** - Why you, not alternatives
+8. **ROI** - Expected return with timeline
+9. **Pricing** - Options with recommendation
+10. **Next Steps** - Clear, low-friction CTA
+
+For each slide provide:
+- Headline (benefit, not feature)
+- Key talking points (3 max)
+- Visual suggestion
+- Objection it preemptively handles`
+    },
+
+    // === HEALTH ===
+    {
+        id: 40,
+        title: 'Workout Plan Generator',
+        category: 'health',
+        models: ['chatgpt', 'claude', 'gemini'],
+        tags: ['fitness', 'workout', 'exercise'],
+        popularity: 80,
+        prompt: `Create a personalized workout plan:
+
+**My Profile:**
+- Goal: [LOSE WEIGHT / BUILD MUSCLE / IMPROVE ENDURANCE / GENERAL FITNESS]
+- Experience: [BEGINNER / INTERMEDIATE / ADVANCED]
+- Available days: [X DAYS PER WEEK]
+- Session length: [X MINUTES]
+- Equipment: [GYM / HOME / MINIMAL]
+- Injuries/limitations: [ANY]
+- Age range: [RANGE]
+
+**Generate:**
+1. **Weekly split** - Which muscle groups on which days
+2. **Each workout** - Exercises, sets, reps, rest times
+3. **Warm-up routine** (5 min)
+4. **Cool-down routine** (5 min)
+5. **Progression plan** - How to increase difficulty over 4 weeks
+6. **Alternatives** - Swap options for each exercise
+7. **Recovery tips** - Sleep, nutrition basics
+
+Format as a clean table. Include video search terms for unfamiliar exercises.
+
+Disclaimer: This is general guidance, not medical advice. Consult a professional for specific needs.`
+    },
 ];
