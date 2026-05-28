@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://summerlv.github.io/oversea0528/sitemap.xml
+Sitemap: https://summerlv.github.io/promptbetter/sitemap.xml

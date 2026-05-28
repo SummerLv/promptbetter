@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initFilters();
     initModelFilters();
+    initMobileMenu();
 });
 
 // Render category cards
@@ -136,24 +137,39 @@ function initSearch() {
     const input = document.getElementById('search-input');
     let debounceTimer;
 
+    const doSearch = () => {
+        const query = input.value.toLowerCase().trim();
+        if (query.length < 2) {
+            renderPrompts(PROMPTS);
+            return;
+        }
+        const filtered = PROMPTS.filter(p =>
+            p.title.toLowerCase().includes(query) ||
+            p.prompt.toLowerCase().includes(query) ||
+            p.tags.some(t => t.includes(query)) ||
+            p.category.includes(query)
+        );
+        renderPrompts(filtered, 20);
+        document.getElementById('popular').scrollIntoView({ behavior: 'smooth' });
+    };
+
     input.addEventListener('input', (e) => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            const query = e.target.value.toLowerCase().trim();
-            if (query.length < 2) {
-                renderPrompts(PROMPTS);
-                return;
-            }
+        debounceTimer = setTimeout(doSearch, 300);
+    });
 
-            const filtered = PROMPTS.filter(p =>
-                p.title.toLowerCase().includes(query) ||
-                p.prompt.toLowerCase().includes(query) ||
-                p.tags.some(t => t.includes(query)) ||
-                p.category.includes(query)
-            );
+    // Search button click
+    const searchBtn = input.nextElementSibling;
+    if (searchBtn) {
+        searchBtn.addEventListener('click', doSearch);
+    }
 
-            renderPrompts(filtered, 20);
-        }, 300);
+    // Enter key
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            clearTimeout(debounceTimer);
+            doSearch();
+        }
     });
 }
 
@@ -203,6 +219,40 @@ function showToast(message) {
         toast.classList.add('translate-y-2', 'opacity-0');
         setTimeout(() => toast.classList.add('hidden'), 300);
     }, 2000);
+}
+
+// Mobile menu
+function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    // Create mobile menu
+    const nav = document.querySelector('nav .max-w-7xl');
+    const mobileMenu = document.createElement('div');
+    mobileMenu.id = 'mobile-menu';
+    mobileMenu.className = 'hidden md:hidden bg-white border-t border-gray-100 py-4 px-4 space-y-3';
+    mobileMenu.innerHTML = `
+        <a href="#categories" class="block text-gray-600 hover:text-indigo-500 py-2">Categories</a>
+        <a href="#popular" class="block text-gray-600 hover:text-indigo-500 py-2">Popular</a>
+        <a href="#models" class="block text-gray-600 hover:text-indigo-500 py-2">AI Models</a>
+        <a href="https://buymeacoffee.com/promptbetter" target="_blank" rel="noopener" class="block bg-yellow-400 text-black font-medium px-4 py-2 rounded-lg text-center">☕ Buy me a coffee</a>
+    `;
+    nav.parentNode.insertBefore(mobileMenu, nav.nextSibling);
+
+    btn.setAttribute('aria-label', 'Toggle menu');
+    btn.setAttribute('aria-expanded', 'false');
+
+    btn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    });
+
+    // Close menu on link click
+    mobileMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            btn.setAttribute('aria-expanded', 'false');
+        });
+    });
 }
 
 // Utility functions

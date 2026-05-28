@@ -354,10 +354,10 @@
 
         // Group B - USA, England, Iran, Wales
         { id: 7, date: "2026-06-12T00:00:00Z", team1: "USA", team2: "Wales", flag1: "🇺🇸", flag2: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", group: "B", stage: "group", venue: "SoFi Stadium", city: "Los Angeles" },
-        { id: 8, date: "2026-06-12T19:00:00Z", team1: "England", team2: "Iran", flag1: "🇬🇧", flag2: "🇮🇷", group: "B", stage: "group", venue: "MetLife Stadium", city: "New York/New Jersey" },
+        { id: 8, date: "2026-06-12T19:00:00Z", team1: "England", team2: "Iran", flag1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", flag2: "🇮🇷", group: "B", stage: "group", venue: "MetLife Stadium", city: "New York/New Jersey" },
         { id: 9, date: "2026-06-17T00:00:00Z", team1: "USA", team2: "Iran", flag1: "🇺🇸", flag2: "🇮🇷", group: "B", stage: "group", venue: "SoFi Stadium", city: "Los Angeles" },
-        { id: 10, date: "2026-06-17T19:00:00Z", team1: "England", team2: "Wales", flag1: "🇬🇧", flag2: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", group: "B", stage: "group", venue: "Lincoln Financial Field", city: "Philadelphia" },
-        { id: 11, date: "2026-06-22T22:00:00Z", team1: "England", team2: "USA", flag1: "🇬🇧", flag2: "🇺🇸", group: "B", stage: "group", venue: "MetLife Stadium", city: "New York/New Jersey" },
+        { id: 10, date: "2026-06-17T19:00:00Z", team1: "England", team2: "Wales", flag1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", flag2: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", group: "B", stage: "group", venue: "Lincoln Financial Field", city: "Philadelphia" },
+        { id: 11, date: "2026-06-22T22:00:00Z", team1: "England", team2: "USA", flag1: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", flag2: "🇺🇸", group: "B", stage: "group", venue: "MetLife Stadium", city: "New York/New Jersey" },
         { id: 12, date: "2026-06-22T22:00:00Z", team1: "Iran", team2: "Wales", flag1: "🇮🇷", flag2: "🏴󠁧󠁢󠁷󠁬󠁳󠁿", group: "B", stage: "group", venue: "BMO Field", city: "Toronto" },
 
         // Group C - Argentina, Saudi Arabia, Poland, Australia
@@ -415,7 +415,7 @@
         { id: 66, date: "2026-07-15T22:00:00Z", team1: "TBD", team2: "TBD", flag1: "❓", flag2: "❓", group: "-", stage: "sf", venue: "MetLife Stadium", city: "New York/New Jersey" },
 
         // Third Place & Final
-        { id: 67, date: "2026-07-18T22:00:00Z", team1: "TBD", team2: "TBD", flag1: "❓", flag2: "❓", group: "-", stage: "final", venue: "MetLife Stadium", city: "New York/New Jersey" },
+        { id: 67, date: "2026-07-18T22:00:00Z", team1: "TBD", team2: "TBD", flag1: "🥉", flag2: "🥉", group: "-", stage: "third", venue: "MetLife Stadium", city: "New York/New Jersey" },
         { id: 68, date: "2026-07-19T20:00:00Z", team1: "TBD", team2: "TBD", flag1: "🏆", flag2: "🏆", group: "-", stage: "final", venue: "MetLife Stadium", city: "New York/New Jersey" },
     ];
 
@@ -425,7 +425,7 @@
     const commonTimezones = [
         "America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles",
         "America/Mexico_City", "America/Toronto", "America/Vancouver", "America/Sao_Paulo",
-        "America/Buenos_Aires", "America/Bogota", "America/Lima",
+        "America/Argentina/Buenos_Aires", "America/Bogota", "America/Lima",
         "Europe/London", "Europe/Paris", "Europe/Berlin", "Europe/Madrid", "Europe/Rome",
         "Europe/Amsterdam", "Europe/Zurich", "Europe/Moscow", "Europe/Istanbul",
         "Asia/Tokyo", "Asia/Seoul", "Asia/Shanghai", "Asia/Hong_Kong", "Asia/Singapore",
@@ -694,9 +694,10 @@
     // ==========================================
     function updateCountdown() {
         const now = new Date();
-        // Find next upcoming match
+        // Sort matches by date to find the true next match
+        const sortedMatches = [...matches].sort((a, b) => new Date(a.date) - new Date(b.date));
         let targetMatch = null;
-        for (const match of matches) {
+        for (const match of sortedMatches) {
             if (new Date(match.date) > now) {
                 targetMatch = match;
                 break;
@@ -712,7 +713,7 @@
         const diff = target - now;
 
         if (diff <= 0) {
-            updateCountdown(); // Refresh to next match
+            setTimeout(updateCountdown, 100); // Avoid synchronous recursion
             return;
         }
 
