@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://summerlv.github.io/oversea0528/sitemap.xml
